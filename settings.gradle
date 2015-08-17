@@ -1,1 +1,3 @@
 include ':utilities'
+include ':datakitapi'
+project(':datakitapi').projectDir=new File('../mCerebrum-DataKitAPI/datakitapi')
