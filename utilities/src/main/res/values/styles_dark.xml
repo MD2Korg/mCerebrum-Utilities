@@ -1,0 +1,56 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppThemeDark" parent="@android:style/Theme.Holo"
+        >
+        <item name="android:textColorSecondary">@color/teal_a100</item>
+        <item name="android:buttonStyleToggle">@style/togglebutton_dark</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:actionBarStyle">@style/actionbar_dark</item>
+    </style>
+    <style name="actionbar_dark" parent="@android:style/Widget.Holo.ActionBar">
+    <item name="android:background">@color/teal_800</item>
+</style>
+    <style name="textview_heading1_dark">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/teal_a700</item>
+    </style>
+    <style name="textview_heading2_dark">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/teal_a100</item>
+    </style>
+
+    <style name="textview_normal_dark">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">@color/WHITE</item>
+
+    </style>
+
+    <style name="view_divider_dark">
+        <item name="android:background">@color/GRAY</item>
+        <item name="android:windowBackground">@color/GRAY</item>
+        <item name="android:colorBackground">@color/GRAY</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="switch_dark">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:thumb">@drawable/switch_thumb_dark</item>
+        <item name="android:track">@drawable/switch_track_dark</item>
+
+    </style>
+    <style name="togglebutton_dark" parent="android:Widget.Holo.Button.Toggle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/togglebutton_dark</item>
+    </style>
+
+</resources>
