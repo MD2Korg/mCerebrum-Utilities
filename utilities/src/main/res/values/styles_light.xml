@@ -1,23 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppThemeLight" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:buttonStyleToggle">@style/togglebutton_light</item>
-        <item name="android:buttonStyle">@style/buttonstyle_light</item>
+    <style name="AppThemeLight" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/actionbar_light</item>
     </style>
 
-    <style name="togglebutton_light" parent="android:Widget.Holo.Button.Toggle">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/togglebutton_light</item>
-        <item name="android:textColor">@color/BLACK</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-    </style>
-    <style name="buttonstyle_light">
-        <item name="android:background">@drawable/button_light</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:gravity">center_vertical|center_horizontal</item>
-    </style>
     <style name="actionbar_light" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/teal_800</item>
         <item name="android:titleTextStyle">@style/TitleTextStyle</item>    </style>
