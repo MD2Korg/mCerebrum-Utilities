@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="AppThemeLight" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/actionbar_light</item>
+        <item name="android:buttonStyle">@style/ButtonLight</item>
+        <item name="android:buttonStyleToggle">@style/ToggleLight</item>
+
     </style>
 
     <style name="actionbar_light" parent="@android:style/Widget.Holo.Light.ActionBar">
@@ -10,4 +13,15 @@
     <style name="TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/WHITE</item>
     </style>
+    <style name="ButtonLight" parent="android:Widget.Holo.Light.Button">
+        <item name="android:background">@drawable/button_light</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+    <style name="ToggleLight" parent="android:Widget.Holo.Light.Button.Toggle">
+        <item name="android:background">@drawable/button_toggle_light</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
+
+
 </resources>
