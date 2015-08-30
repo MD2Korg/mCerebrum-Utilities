@@ -20,4 +20,14 @@
     <color name="teal_a400">#1DE9B6</color>
     <color name="teal_a700">#00BFA5</color>
 
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_500">#9E9E9E</color>
+
+    <color name="amber_900">#FF6F00</color>
+    <color name="blue_400">#42A5F5</color>
+    <color name="deeporange_500">#FF5722</color>
+    <color name="deeporange_a400">#FF3D00</color>
+    <color name="orange_600">#F57C00</color>
+
+
 </resources>
