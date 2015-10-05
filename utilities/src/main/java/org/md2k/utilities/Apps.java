@@ -2,6 +2,7 @@ package org.md2k.utilities;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
 import org.md2k.datakitapi.time.DateTime;
@@ -76,6 +77,22 @@ public class Apps {
             }
         }
         return -1;
+    }
+    public static int getVersionCode(Context context,String packageName){
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi.versionCode;
+        } catch (PackageManager.NameNotFoundException ex) {}
+        return 0;
+    }
+    public static String getVersionName(Context context,String packageName){
+        PackageManager pm = context.getPackageManager();
+        try {
+            PackageInfo pi = pm.getPackageInfo(packageName, 0);
+            return pi.versionName;
+        } catch (PackageManager.NameNotFoundException ex) {}
+        return null;
     }
 
 }
