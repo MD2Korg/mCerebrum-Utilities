@@ -1,8 +1,11 @@
 <resources>
-    <string name="app_name">AutoSense</string>
-    <string name="app_description">A software that reads AutoSense sensor data and push to DataKit</string>
+    <string name="app_name">mCerebrum</string>
+    <string name="app_description">A set of apps that collects sensor data, analyzes them and act accordingly</string>
+    <string name="version">""</string>
+    <string name="url_webpage">http://md2korg.github.io/mCerebrum/</string>
+    <string name="url_release">https://github.com/MD2Korg</string>
+    <string name="url_sourcecode">https://github.com/MD2Korg</string>
     <string name="app_developer">Syed Monowar Hossain\nmonowar.hossain@gmail.com\nTimothy Hnat\ntwhnat@memphis.edu</string>
-    <string name="app_url">https://github.com/MD2Korg/mCerebrum-AutoSense</string>
     <string name="app_copyright">Copyright © 2015, MD2K.org
 \nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:\n\n
@@ -21,5 +24,6 @@ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
 CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
+
     <string name="action_settings">Settings</string>
 </resources>

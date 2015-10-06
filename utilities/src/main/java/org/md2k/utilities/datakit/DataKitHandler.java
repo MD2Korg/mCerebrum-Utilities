@@ -61,6 +61,7 @@ public class DataKitHandler {
         return connected;
     }
     private DataKitHandler(Context context){
+        Log.d(TAG,"DataKitHandler()...constructor()");
         this.context=context;
         connected=false;
         dataKitApi = new DataKitApi(context);
@@ -73,6 +74,7 @@ public class DataKitHandler {
         }
     };
     public boolean connect(OnConnectionListener callerOnConnectionListener) {
+        Log.d(TAG,"connect()...");
         this.callerOnConnectedListener=callerOnConnectionListener;
         return dataKitApi.connect(onConnectionListener);
     }
@@ -80,13 +82,16 @@ public class DataKitHandler {
         dataKitApi.insert(dataSourceClient, data).await();
     }
     public DataSourceClient register(DataSourceBuilder dataSourceBuilder){
+        Log.d(TAG,"register()...");
         return dataKitApi.register(dataSourceBuilder).await();
     }
     public void disconnect(){
+        Log.d(TAG,"disconnect()...");
         dataKitApi.disconnect();
         connected=false;
     }
     public void close(){
+        Log.d(TAG,"close()...");
         instance=null;
     }
 }

@@ -1,13 +1,4 @@
-package org.md2k.utilities.UI;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
-
-import org.md2k.utilities.Constants;
-import org.md2k.utilities.R;
+package org.md2k.utilities;
 
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
@@ -35,36 +26,13 @@ import org.md2k.utilities.R;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class ActivityAbout extends Activity {
-    // Activity tag used by logging APIs
-    private static final String TAG = ActivityAbout.class.getSimpleName();
+public class Constants {
+    public static String VERSION_CODE="version_code";
+    public static String VERSION_NAME="version_name";
+    public static String APP_NAME="app_name";
+    public static String APP_DESCRIPTION="app_description";
+    public static String APP_DEVELOPER="app_developer";
+    public static String URL_RELEASE="url_release";
+    public static String URL_SOURCECODE="url_sourcecode";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        // Initialize the layout
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        if(getIntent().getStringExtra(Constants.VERSION_NAME)!=null)
-            ((TextView)findViewById(R.id.textView_version)).setText(getIntent().getStringExtra(Constants.VERSION_NAME)+" ("+getIntent().getStringExtra(Constants.VERSION_CODE)+")");
-
-        findViewById(R.id.buttonAboutOk).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                finish();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }
