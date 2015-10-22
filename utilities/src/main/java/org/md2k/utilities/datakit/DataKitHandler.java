@@ -9,6 +9,7 @@ import org.md2k.datakitapi.DataKitApi;
 import org.md2k.datakitapi.datatype.DataType;
 import org.md2k.datakitapi.datatype.DataTypeString;
 import org.md2k.datakitapi.messagehandler.OnConnectionListener;
+import org.md2k.datakitapi.source.application.ApplicationBuilder;
 import org.md2k.datakitapi.source.datasource.DataSource;
 import org.md2k.datakitapi.source.datasource.DataSourceBuilder;
 import org.md2k.datakitapi.source.datasource.DataSourceClient;
@@ -17,6 +18,8 @@ import org.md2k.datakitapi.source.platform.PlatformBuilder;
 import org.md2k.datakitapi.source.platform.PlatformType;
 import org.md2k.datakitapi.time.DateTime;
 import org.md2k.utilities.Report.Log;
+
+import java.util.ArrayList;
 
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
@@ -77,6 +80,9 @@ public class DataKitHandler {
         Log.d(TAG,"connect()...");
         this.callerOnConnectedListener=callerOnConnectionListener;
         return dataKitApi.connect(onConnectionListener);
+    }
+    public ArrayList<DataSourceClient> find(DataSourceBuilder dataSourceBuilder){
+        return dataKitApi.find(dataSourceBuilder).await();
     }
     public void insert(DataSourceClient dataSourceClient, DataType data){
         dataKitApi.insert(dataSourceClient, data).await();

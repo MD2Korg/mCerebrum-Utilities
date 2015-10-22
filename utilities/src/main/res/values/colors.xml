@@ -18,4 +18,8 @@
     <color name="teal_a400">#1DE9B6</color>
     <color name="teal_a700">#00BFA5</color>
     <color name="WHITE">#ffffff</color>
+    <color name="yellow_700">#FBC02D</color>
+    <color name="yellow_900">#F57F17</color>
+    <color name="lightgreen_700">#689F38</color>
+    <color name="lightgreen_900">#33691E</color>
 </resources>
