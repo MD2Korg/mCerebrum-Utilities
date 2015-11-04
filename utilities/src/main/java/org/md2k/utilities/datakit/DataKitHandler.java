@@ -1,9 +1,6 @@
 package org.md2k.utilities.datakit;
 
 import android.content.Context;
-import android.telephony.TelephonyManager;
-
-import com.google.gson.Gson;
 
 import org.md2k.datakitapi.DataKitApi;
 import org.md2k.datakitapi.datatype.DataType;
@@ -16,6 +13,7 @@ import org.md2k.datakitapi.source.datasource.DataSourceClient;
 import org.md2k.datakitapi.source.datasource.DataSourceType;
 import org.md2k.datakitapi.source.platform.PlatformBuilder;
 import org.md2k.datakitapi.source.platform.PlatformType;
+import org.md2k.datakitapi.status.Status;
 import org.md2k.datakitapi.time.DateTime;
 import org.md2k.utilities.Report.Log;
 
@@ -88,9 +86,21 @@ public class DataKitHandler {
         dataKitApi.insert(dataSourceClient, data).await();
     }
     public DataSourceClient register(DataSourceBuilder dataSourceBuilder){
-        Log.d(TAG,"register()...");
+        Log.d(TAG, "register()...");
         return dataKitApi.register(dataSourceBuilder).await();
     }
+    public Status unregister(DataSourceClient dataSourceClient){
+        Log.d(TAG, "register()...");
+        return dataKitApi.unregister(dataSourceClient).await();
+    }
+
+    public ArrayList<DataType> query(DataSourceClient dataSourceClient, int last_n_sample){
+        return dataKitApi.query(dataSourceClient, last_n_sample).await();
+    }
+    public ArrayList<DataType> query(DataSourceClient dataSourceClient, long starttimestamp,long endtimestamp){
+        return dataKitApi.query(dataSourceClient,starttimestamp,endtimestamp).await();
+    }
+
     public void disconnect(){
         Log.d(TAG,"disconnect()...");
         dataKitApi.disconnect();
