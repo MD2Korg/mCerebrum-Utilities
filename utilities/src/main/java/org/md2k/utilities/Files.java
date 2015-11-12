@@ -47,9 +47,7 @@ public class Files {
 
     public static boolean isExist(String filename) {
         File file = new File(filename);
-        if (file.exists())
-            return true;
-        return false;
+        return file.exists();
     }
 
     public static ArrayList<DataSource> readDataSourceFromFile(String filename) throws FileNotFoundException {
