@@ -6,6 +6,7 @@ import org.md2k.datakitapi.DataKitApi;
 import org.md2k.datakitapi.datatype.DataType;
 import org.md2k.datakitapi.datatype.DataTypeString;
 import org.md2k.datakitapi.messagehandler.OnConnectionListener;
+import org.md2k.datakitapi.messagehandler.OnReceiveListener;
 import org.md2k.datakitapi.source.application.ApplicationBuilder;
 import org.md2k.datakitapi.source.datasource.DataSource;
 import org.md2k.datakitapi.source.datasource.DataSourceBuilder;
@@ -99,6 +100,12 @@ public class DataKitHandler {
     }
     public ArrayList<DataType> query(DataSourceClient dataSourceClient, long starttimestamp,long endtimestamp){
         return dataKitApi.query(dataSourceClient,starttimestamp,endtimestamp).await();
+    }
+    public void subscribe(DataSourceClient dataSourceClient, OnReceiveListener onReceiveListener){
+        dataKitApi.subscribe(dataSourceClient,onReceiveListener);
+    }
+    public Status unsubscribe(DataSourceClient dataSourceClient){
+        return dataKitApi.unsubscribe(dataSourceClient).await();
     }
 
     public void disconnect(){
