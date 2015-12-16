@@ -8,7 +8,7 @@
         >
 
     <TextView
-        style="@style/AppThemeTealLight.textView_Header_Teal_Left_Round"
+        style="?attr/text_view_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/status" />

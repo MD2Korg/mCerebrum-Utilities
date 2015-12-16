@@ -57,7 +57,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/header.overview"
-                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    style="?attr/text_view_title"
                     />
 
                 <include
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/header.links"
-                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    style="?attr/text_view_title"
                     />
                 <include layout="@layout/space"/>
 
@@ -173,7 +173,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/header.developer_contributer"
-                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    style="?attr/text_view_title"
                     />
 
                 <include
