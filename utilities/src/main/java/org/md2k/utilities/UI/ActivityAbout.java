@@ -2,6 +2,7 @@ package org.md2k.utilities.UI;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ import org.md2k.utilities.R;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class ActivityAbout extends Activity {
+public class ActivityAbout extends AppCompatActivity {
     // Activity tag used by logging APIs
     private static final String TAG = ActivityAbout.class.getSimpleName();
 
@@ -54,7 +55,8 @@ public class ActivityAbout extends Activity {
                 finish();
             }
         });
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
     @Override

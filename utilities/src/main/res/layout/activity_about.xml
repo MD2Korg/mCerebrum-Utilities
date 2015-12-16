@@ -4,166 +4,192 @@
     android:orientation="vertical">
 
     <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:isScrollContainer="true"
             android:orientation="vertical"
             android:scrollbars="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
                 android:orientation="vertical"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/grey_300">
+
+                <include layout="@layout/space"/>
+
+                <include layout="@layout/space"/>
 
                 <TextView
                     android:id="@+id/textView_app_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-
+                    android:textColor="?android:textColorPrimary"
                     android:text="@string/app_name"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/amber_900"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?android:textColorPrimary"
                     android:id="@+id/textView_version"
                     android:gravity="center"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="@color/amber_900" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <include layout="@layout/space"/>
+
+                <include layout="@layout/space"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/header.overview"
+                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    />
+
+                <include
+                    layout="@layout/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:paddingTop="20dp"
                     android:text="@string/app_description"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
                     android:id="@+id/textView_app_description" />
-            </LinearLayout>
 
-            <View style="@style/view_divider_dark" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="50dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="Web Page" />
-
-                <TextView
-                    android:id="@+id/textView_url_webpage"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:autoLink="web"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="@string/url_webpage" />
+                <include
+                    layout="@layout/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <View style="@style/view_divider_dark" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="Releases" />
-
-                <TextView
-                    android:id="@+id/textView_url_release"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:autoLink="web"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="@string/url_release" />
+                    android:text="@string/header.links"
+                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    />
+                <include layout="@layout/space"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:singleLine="false"
+                        android:text="Releases" />
+
+                    <TextView
+                        android:id="@+id/textView_url_release"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:autoLink="web"
+                        android:gravity="center_vertical"
+                        android:singleLine="false"
+                        android:text="@string/url_release" />
+
+                </LinearLayout>
+
+                <include
+                    layout="@layout/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="3"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="10dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:singleLine="false"
+                        android:text="Source Code" />
+
+                    <TextView
+                        android:id="@+id/textView_url_sourcecode"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:autoLink="web"
+                        android:gravity="center_vertical"
+                        android:singleLine="false"
+                        android:text="@string/url_sourcecode" />
+
+                </LinearLayout>
+
+                <include
+                    layout="@layout/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
-            <View style="@style/view_divider_dark" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="Source Code" />
-
-                <TextView
-                    android:id="@+id/textView_url_sourcecode"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:autoLink="web"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="@string/url_sourcecode" />
-
-            </LinearLayout>
-
-            <View style="@style/view_divider_dark" />
+            <include
+                layout="@layout/space"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight="3"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:singleLine="false"
-                    android:text="Developers and Contributors" />
-
-                <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:text="@string/header.developer_contributer"
+                    style="@style/AppThemeTealLight.textView_Header_Teal_Center"
+                    />
+
+                <include
+                    layout="@layout/space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:autoLink="email"
-                    android:gravity="center_vertical"
+                    android:gravity="center_horizontal"
                     android:singleLine="false"
                     android:text="@string/app_developer"
                     android:id="@+id/textView_app_developer" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -172,9 +198,9 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ok"
+        android:text="@string/button_ok"
         android:id="@+id/buttonAboutOk"
-        android:layout_weight="0"
         android:layout_alignParentEnd="false"
+        android:background="@drawable/button_teal"
         android:layout_alignParentBottom="true" />
 </RelativeLayout>

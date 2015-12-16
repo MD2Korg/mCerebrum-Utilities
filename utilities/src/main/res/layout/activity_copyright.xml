@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="false"
+        android:background="@drawable/button_teal"
         android:layout_weight="0"
         android:text="Ok"
         android:layout_marginTop="10dp" />

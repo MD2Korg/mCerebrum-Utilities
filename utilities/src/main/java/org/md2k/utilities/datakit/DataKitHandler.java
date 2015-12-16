@@ -51,6 +51,7 @@ public class DataKitHandler {
     DataKitApi dataKitApi;
     Context context;
     boolean connected;
+    DataSourceClient dataSourceClient;
     private static DataKitHandler instance=null;
     private OnConnectionListener callerOnConnectedListener;
     public static DataKitHandler getInstance(Context context){
@@ -72,19 +73,24 @@ public class DataKitHandler {
         @Override
         public void onConnected() {
             connected=true;
+            dataSourceClient=register(new DataSourceBuilder().setType(DataSourceType.LOG));
             callerOnConnectedListener.onConnected();
         }
     };
+    public void log(String message){
+        DataTypeString dataTypeString=new DataTypeString(DateTime.getDateTime(),message);
+        insert(dataSourceClient,dataTypeString);
+    }
     public boolean connect(OnConnectionListener callerOnConnectionListener) {
         Log.d(TAG,"connect()...");
-        this.callerOnConnectedListener=callerOnConnectionListener;
+        this.callerOnConnectedListener = callerOnConnectionListener;
         return dataKitApi.connect(onConnectionListener);
     }
     public ArrayList<DataSourceClient> find(DataSourceBuilder dataSourceBuilder){
         return dataKitApi.find(dataSourceBuilder).await();
     }
     public void insert(DataSourceClient dataSourceClient, DataType data){
-        dataKitApi.insert(dataSourceClient, data).await();
+        dataKitApi.insert(dataSourceClient, data);
     }
     public DataSourceClient register(DataSourceBuilder dataSourceBuilder){
         Log.d(TAG, "register()...");

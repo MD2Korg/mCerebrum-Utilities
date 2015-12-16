@@ -38,8 +38,23 @@ public class AlertDialogs {
     public static void showAlertDialogDataKit(final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(context)
                 .setTitle("Error: DataKit")
-                .setIcon(R.drawable.ic_error_outline_white_24dp)
+//                .setIcon(R.drawable.ic_error_outline_white_24dp)
                 .setMessage("DataKit is not installed.\n\n Please install DataKit")
+                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                })
+                .create();
+
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alertDialog.show();
+    }
+    public static void showAlertDialog(final Context context, String title, String message){
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setIcon(R.drawable.ic_error_red_50dp)
+                .setMessage(message)
                 .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

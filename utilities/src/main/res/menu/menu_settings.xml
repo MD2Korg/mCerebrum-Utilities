@@ -1,22 +1,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".AutoSenseActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".AutoSenseActivity">
     <item
-        android:showAsAction="ifRoom"
-        android:title="menu">
-        <menu>
-            <item
-                android:id="@+id/action_settings"
-                android:icon="@drawable/ic_settings_white_24dp"
-                android:title="Settings" />
-            <item
-                android:id="@+id/action_about"
-                android:icon="@drawable/ic_info_outline_white_24dp"
-                android:title="About" />
-            <item
-                android:id="@+id/action_copyright"
-                android:icon="@drawable/ic_copyright_24_white"
-                android:title="Copyright" />
-        </menu>
-    </item>
+        android:id="@+id/action_settings"
+        android:icon="@drawable/ic_settings_white_48dp"
+        app:showAsAction="ifRoom"
+        android:title="Settings" />
+    <item
+        android:id="@+id/action_about"
+        android:icon="@drawable/ic_info_teal_48dp"
+        android:title="About" />
+    <item
+        android:id="@+id/action_copyright"
+        android:icon="@drawable/ic_copyright_teal_48dp"
+        android:title="Copyright" />
 </menu>

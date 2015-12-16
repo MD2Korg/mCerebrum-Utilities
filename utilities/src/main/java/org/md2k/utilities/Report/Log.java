@@ -1,5 +1,9 @@
 package org.md2k.utilities.Report;
 
+import android.content.Context;
+
+import org.md2k.utilities.datakit.DataKitHandler;
+
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -35,7 +39,6 @@ public class Log {
         android.util.Log.w("[MD2K]"+TAG,logMessage);
     }
     public static void e(String TAG,String logMessage){
-        android.util.Log.e("[MD2K]"+TAG,logMessage);
+        android.util.Log.e("[MD2K]" + TAG, logMessage);
     }
-
 }
