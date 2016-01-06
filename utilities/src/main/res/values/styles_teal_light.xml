@@ -9,7 +9,6 @@
         <item name="android:textColorPrimary">@color/teal_700</item>
         <item name="android:textColorSecondary">@color/secondary_text_color_selector</item>
         <item name="android:listSeparatorTextViewStyle">@style/app_theme_teal_light.preference_list_title</item>
-        <item name="android:padding">0dp</item>
         <item name="button">@style/app_theme_teal_light.button</item>
         <item name="text_view_primary_color">@style/app_theme_teal_light.text_view_primary_color</item>
         <item name="text_view_title">@style/app_theme_teal_light.text_view_title</item>

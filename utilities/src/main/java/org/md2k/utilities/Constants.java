@@ -1,5 +1,7 @@
 package org.md2k.utilities;
 
+import android.os.Environment;
+
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -34,5 +36,6 @@ public class Constants {
     public static String APP_DEVELOPER="app_developer";
     public static String URL_RELEASE="url_release";
     public static String URL_SOURCECODE="url_sourcecode";
+    public static String CONFIG_DIRECTORY= Environment.getExternalStorageDirectory().getAbsolutePath() + "/mCerebrum/config/";
 
 }
