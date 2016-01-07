@@ -12,6 +12,7 @@ import org.md2k.datakitapi.source.datasource.DataSource;
 import org.md2k.datakitapi.source.datasource.DataSourceBuilder;
 import org.md2k.datakitapi.source.datasource.DataSourceClient;
 import org.md2k.datakitapi.source.datasource.DataSourceType;
+import org.md2k.datakitapi.source.platform.Platform;
 import org.md2k.datakitapi.source.platform.PlatformBuilder;
 import org.md2k.datakitapi.source.platform.PlatformType;
 import org.md2k.datakitapi.status.Status;
@@ -73,7 +74,8 @@ public class DataKitHandler {
         @Override
         public void onConnected() {
             connected=true;
-            dataSourceClient=register(new DataSourceBuilder().setType(DataSourceType.LOG));
+            Platform platform=new PlatformBuilder().setType(PlatformType.PHONE).build();
+            dataSourceClient=register(new DataSourceBuilder().setType(DataSourceType.LOG).setPlatform(platform));
             callerOnConnectedListener.onConnected();
         }
     };
