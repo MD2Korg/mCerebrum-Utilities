@@ -65,5 +65,27 @@ public class AlertDialogs {
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
     }
+    public static void showAlertDialogConfirm(final Context context, String title, String message, String positive, String negative,final DialogInterface.OnClickListener onClickListener){
+        AlertDialog alertDialog = new AlertDialog.Builder(context)
+                .setTitle(title)
+                .setIcon(R.drawable.ic_info_teal_48dp)
+                .setMessage(message)
+                .setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onClickListener.onClick(dialog,which);
+                    }
+                })
+                .setPositiveButton(positive, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        onClickListener.onClick(dialog,which);
+                    }
+                })
+                .create();
+
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alertDialog.show();
+    }
 
 }

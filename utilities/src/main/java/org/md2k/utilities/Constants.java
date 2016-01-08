@@ -36,6 +36,7 @@ public class Constants {
     public static String APP_DEVELOPER="app_developer";
     public static String URL_RELEASE="url_release";
     public static String URL_SOURCECODE="url_sourcecode";
-    public static String CONFIG_DIRECTORY= Environment.getExternalStorageDirectory().getAbsolutePath() + "/mCerebrum/config/";
+    public static String DIRECTORY=Environment.getExternalStorageDirectory().getAbsolutePath() + "/mCerebrum/";
+    public static String CONFIG_DIRECTORY= DIRECTORY+"config/";
 
 }
