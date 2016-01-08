@@ -84,6 +84,10 @@ public class DataKitHandler {
         insert(dataSourceClient,dataTypeString);
     }
     public boolean connect(OnConnectionListener callerOnConnectionListener) {
+        if(isConnected()) {
+            callerOnConnectionListener.onConnected();
+            return true;
+        }
         Log.d(TAG,"connect()...");
         this.callerOnConnectedListener = callerOnConnectionListener;
         return dataKitApi.connect(onConnectionListener);
