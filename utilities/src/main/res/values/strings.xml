@@ -3,7 +3,7 @@
     <string name="header.overview">Overview</string>
     <string name="header.links">Links</string>
     <string name="app_name">mCerebrum</string>
-    <string name="app_description">A set of apps that collects sensor data, analyzes them and act accordingly</string>
+    <string name="app_description">A set of serviceApps that collects sensor data, analyzes them and act accordingly</string>
     <string name="version">""</string>
     <string name="url_webpage">http://md2korg.github.io/mCerebrum/</string>
     <string name="url_release">https://github.com/MD2Korg</string>

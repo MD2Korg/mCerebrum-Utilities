@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.md2k.utilities.Constants;
@@ -48,15 +49,21 @@ public class ActivityAbout extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         if(getIntent().getStringExtra(Constants.VERSION_NAME)!=null)
             ((TextView)findViewById(R.id.textView_version)).setText(getIntent().getStringExtra(Constants.VERSION_NAME)+" ("+getIntent().getStringExtra(Constants.VERSION_CODE)+")");
+        setButtons();
 
-        findViewById(R.id.buttonAboutOk).setOnClickListener(new View.OnClickListener() {
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+    void setButtons(){
+        Button button1= (Button) findViewById(R.id.button_1);
+        button1.setText("Close");
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
     @Override

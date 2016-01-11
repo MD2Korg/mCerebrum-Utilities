@@ -195,12 +195,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_ok"
-        android:id="@+id/buttonAboutOk"
-        android:layout_alignParentEnd="false"
-        android:background="@drawable/button_teal"
-        android:layout_alignParentBottom="true" />
+    <include
+        android:id="@+id/layout_one_button"
+        layout="@layout/layout_one_button" />
 </RelativeLayout>

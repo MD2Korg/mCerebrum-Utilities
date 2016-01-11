@@ -46,14 +46,20 @@ public class ActivityCopyright extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_copyright);
-        ((Button)findViewById(R.id.buttonAboutOk)).setOnClickListener(new View.OnClickListener() {
+        setButtons();
+
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+    void setButtons(){
+        Button button=(Button)findViewById(R.id.button_1);
+        button.setText("Close");
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
