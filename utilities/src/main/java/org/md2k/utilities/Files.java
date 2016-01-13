@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,26 +51,45 @@ public class Files {
         return file.exists();
     }
 
-    public static ArrayList<DataSource> readDataSourceFromFile(String filename) throws FileNotFoundException {
-        ArrayList<DataSource> dataSources=null;
-        Log.d(TAG, "readDataSourceFromFile()" + filename);
-        if (!isExist(filename)) throw new FileNotFoundException();
-        BufferedReader br = new BufferedReader(new FileReader(filename));
+    public static <T> ArrayList<T> readJSONArray(String directory, String filename, Class<T> classType) throws FileNotFoundException {
+        ArrayList<T> dataSources;
+        if (!isExist(directory+filename)) throw new FileNotFoundException();
+        BufferedReader br = new BufferedReader(new FileReader(directory+filename));
         Gson gson = new Gson();
-        Type collectionType = new TypeToken<List<DataSource>>() {
-        }.getType();
-        dataSources = gson.fromJson(br, collectionType);
+        dataSources = gson.fromJson(br, new ListOfSomething<>(classType));
         return dataSources;
     }
-    public static void writeDataSourceToFile(String directory, String filename, ArrayList<DataSource> dataSources) throws IOException {
+
+    public static <T> void writeJSONArray(String directory, String filename, ArrayList<T> data) throws IOException {
         File dir = new File(directory);
         if (!dir.exists()) {
             dir.mkdirs();
         }
         Gson gson = new Gson();
-        String json = gson.toJson(dataSources);
-        FileWriter writer = new FileWriter(directory + File.separator + filename);
+        String json = gson.toJson(data);
+        Log.d(TAG,json);
+        FileWriter writer = new FileWriter(directory + filename);
         writer.write(json);
         writer.close();
+    }
+    static class ListOfSomething<X> implements ParameterizedType {
+
+        private Class<?> wrapped;
+
+        public ListOfSomething(Class<X> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        public Type[] getActualTypeArguments() {
+            return new Type[] {wrapped};
+        }
+
+        public Type getRawType() {
+            return List.class;
+        }
+
+        public Type getOwnerType() {
+            return null;
+        }
     }
 }
