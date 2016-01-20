@@ -121,9 +121,9 @@ public class DataKitHandler {
     }
 
     public void disconnect(){
-        Log.d(TAG,"disconnect()...");
-        dataKitApi.disconnect();
+        Log.d(TAG, "disconnect()...");
         connected=false;
+        dataKitApi.disconnect();
     }
     public void close(){
         Log.d(TAG,"close()...");
