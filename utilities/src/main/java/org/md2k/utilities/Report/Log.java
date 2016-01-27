@@ -1,9 +1,5 @@
 package org.md2k.utilities.Report;
 
-import android.content.Context;
-
-import org.md2k.utilities.datakit.DataKitHandler;
-
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
