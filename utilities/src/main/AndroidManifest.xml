@@ -9,10 +9,12 @@
         android:theme="@style/app_theme_teal_light">
         <activity
             android:name="org.md2k.utilities.UI.ActivityAbout"
+            android:screenOrientation="portrait"
             android:icon="@drawable/ic_info_teal_48dp"
             android:label="About"></activity>
         <activity
             android:name="org.md2k.utilities.UI.ActivityCopyright"
+            android:screenOrientation="portrait"
             android:icon="@drawable/ic_copyright_teal_48dp"
             android:label="Copyright"></activity>
     </application>
