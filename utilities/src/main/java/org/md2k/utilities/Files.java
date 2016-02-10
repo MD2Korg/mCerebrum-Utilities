@@ -1,9 +1,7 @@
 package org.md2k.utilities;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import org.md2k.datakitapi.source.datasource.DataSource;
 import org.md2k.utilities.Report.Log;
 
 import java.io.BufferedReader;
@@ -17,7 +15,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
  * All rights reserved.
