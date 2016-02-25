@@ -1,7 +1,5 @@
 package org.md2k.utilities.data_format;
 
-import org.md2k.datakitapi.time.DateTime;
-
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -28,30 +26,28 @@ import org.md2k.datakitapi.time.DateTime;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Marker {
-    public static final String SMOKING = "SMOKING";
-    public static final String SLEEP = "SLEEP";
-    public static final String WAKEUP="WAKEUP";
-    String type;
-    long timestamp;
-    public Marker(String type){
-        this.type=type;
-        timestamp= DateTime.getDateTime();
+public class UserInfo {
+    String user_id;
+    String uuid;
+
+    public UserInfo() {
+        user_id = null;
+        uuid = null;
     }
 
-    public String getType() {
-        return type;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public String getUuid() {
+        return uuid;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }
