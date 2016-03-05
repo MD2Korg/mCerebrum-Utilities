@@ -48,6 +48,18 @@ public class Files {
         File file = new File(filename);
         return file.exists();
     }
+    public static void deleteDirectory(String directory){
+        deleteRecursive(new File(directory));
+    }
+    private static void deleteRecursive(File fileOrDirectory) {
+
+        if (fileOrDirectory.isDirectory())
+            for (File child : fileOrDirectory.listFiles())
+                deleteRecursive(child);
+
+        fileOrDirectory.delete();
+
+    }
 
     public static <T> ArrayList<T> readJSONArray(String directory, String filename, Class<T> classType) throws FileNotFoundException {
         ArrayList<T> dataSources;
@@ -69,6 +81,10 @@ public class Files {
         FileWriter writer = new FileWriter(directory + filename);
         writer.write(json);
         writer.close();
+    }
+    public static boolean delete(String filename){
+        File file=new File(filename);
+        return file.delete();
     }
     static class ListOfSomething<X> implements ParameterizedType {
 
