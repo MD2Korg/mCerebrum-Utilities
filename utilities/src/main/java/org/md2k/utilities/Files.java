@@ -6,7 +6,9 @@ import org.md2k.utilities.Report.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,6 +16,8 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /*
  * Copyright (c) 2015, The University of Memphis, MD2K Center
@@ -58,7 +62,6 @@ public class Files {
                 deleteRecursive(child);
 
         fileOrDirectory.delete();
-
     }
 
     public static <T> ArrayList<T> readJSONArray(String directory, String filename, Class<T> classType) throws FileNotFoundException {
@@ -106,4 +109,90 @@ public class Files {
             return null;
         }
     }
+    public static void createDir(File dir) {
+        if (dir.exists()) {
+            return;
+        }
+        Log.d(TAG, "Creating dir " + dir.getName());
+        if (!dir.mkdirs()) {
+            throw new RuntimeException("Cannot create dir " + dir);
+        }
+    }
+
+    public static void unzip(String tempFileName, String destinationPath) {
+        try {
+
+            int index = destinationPath.lastIndexOf("/");
+            String fileString = destinationPath.substring(index);
+
+            File extFile = new File(fileString);
+            if(!extFile.exists()) {
+                createDir(extFile);
+            }
+
+            byte[] buffer = new byte[1024];
+
+            FileInputStream fin = new FileInputStream(tempFileName);
+            ZipInputStream zin = new ZipInputStream(fin);
+            ZipEntry zipentry = null;
+            if (!(zin.available() == 0)) {
+                while ((zipentry = zin.getNextEntry()) != null) {
+                    String zipName = zipentry.getName();
+                    if (zipName.startsWith("/")) {
+                        zipName = zipentry.getName();
+                    } else if (zipName.startsWith("\\")) {
+                        zipName = zipentry.getName();
+                    } else {
+                        zipName = "/" + zipentry.getName();
+                    }
+
+                    String fileName = destinationPath + zipName;
+                    fileName = fileName.replace("\\", "/");
+                    fileName = fileName.replace("//", "/");
+
+                    if (zipentry.isDirectory()) {
+                        createDir(new File(fileName));
+                        continue;
+                    }
+
+                    String name = zipentry.getName();
+                    int start, end = 0;
+                    while (true) {
+
+                        start = name.indexOf('\\', end);
+                        end = name.indexOf('\\', start + 1);
+                        if (start > 0)
+                            "check".toString();
+                        if (end > start && end > -1 && start > -1) {
+                            String dir = name.substring(1, end);
+
+                            createDir(new File(destinationPath + '/' + dir));
+                            // name = name.substring(end);
+                        } else
+                            break;
+                    }
+
+                    File file = new File(fileName);
+
+                    FileOutputStream tempDexOut = new FileOutputStream(file);
+                    int BytesRead = 0;
+
+                    if (zipentry != null) {
+                        if (zin != null) {
+                            while ((BytesRead = zin.read(buffer)) != -1) {
+                                tempDexOut.write(buffer, 0, BytesRead);
+                            }
+                            tempDexOut.flush();
+                            tempDexOut.close();
+                            Log.d(TAG,"filename="+file.getAbsolutePath()+" name="+file.getName()+" size="+file.length());
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            Log.e("Exception", e.getMessage());
+        }
+    }
+
 }

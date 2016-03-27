@@ -172,7 +172,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/header.developer_contributer"
+                    android:text="@string/header.developer_contributor"
                     style="?attr/text_view_title"
                     />
 

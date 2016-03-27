@@ -1,5 +1,5 @@
 <resources>
-    <string name="header.developer_contributer">Developer &amp; Contibutor</string>
+    <string name="header.developer_contributor">Developer &amp; Contributor</string>
     <string name="header.overview">Overview</string>
     <string name="header.links">Links</string>
     <string name="app_name">mCerebrum</string>
@@ -12,7 +12,7 @@
     <string name="app_copyright">Copyright © 2015, MD2K.org
 \nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:\n\n
-* Redistributions of source code must retain the above copyright notice, this
+* Redistributions of source status must retain the above copyright notice, this
   list of conditions and the following disclaimer.\n\n
 * Redistributions in binary form must reproduce the above copyright notice,
   this list of conditions and the following disclaimer in the documentation
