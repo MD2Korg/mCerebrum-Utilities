@@ -28,8 +28,11 @@ package org.md2k.utilities.data_format;
  */
 public class DATA_QUALITY {
     public static final int GOOD = 0;
-    public static final int BAND_OFF = -1;
-    public static final int NOT_WORN = -2;
-    public static final int BAND_LOOSE = -3;
-    public static final int NOISE = -4;
+    public static final int NOISE = 1;
+    public static final int BAD = 2;
+    public static final int BAND_OFF = 3;
+    public static final int MISSING=4;
+    public static final int NOT_WORN = 5;
+    public static final int BAND_LOOSE = 6;
+    public static final String METADATA_STR =" GOOD(0), NOISE(1), BAD(2), BAND_OFF(3), MISSING(4), NOT_WORN(5), BAND_LOOSE(6)";
 }
