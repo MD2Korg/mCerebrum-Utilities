@@ -1,5 +1,9 @@
 package org.md2k.utilities;
 
+import android.content.Context;
+import android.os.Environment;
+import android.os.StatFs;
+
 import com.google.gson.Gson;
 
 import org.md2k.utilities.Report.Log;
@@ -45,8 +49,64 @@ import java.util.zip.ZipInputStream;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Files {
-    private static final String TAG = Files.class.getSimpleName();
+public class FileManager {
+    private static final String TAG = FileManager.class.getSimpleName();
+    public static final String INTERNAL_SDCARD = "INTERNAL_SDCARD";
+    public static final String EXTERNAL_SDCARD = "EXTERNAL_SDCARD";
+    public static final String EXTERNAL_SDCARD_PREFERRED = "EXTERNAL_SDCARD_PREFERRED";
+    public static final String INTERNAL_SDCARD_PREFERRED = "INTERNAL_SDCARD_PREFERRED";
+    public static final String NONE = "NONE";
+    private static String getInternalSDCardDirectory(Context context) {
+        String directory = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            directory = Environment.getExternalStorageDirectory().toString() + "/Android/data/" + context.getPackageName() + "/files/";
+            File dir = new File(directory);
+            if (!dir.exists()) {
+                if (!dir.mkdirs()) {
+                    directory = null;
+                }
+            }
+        }
+        return directory;
+    }
+    private static String getExternalSDCardDirectory(Context context) {
+        String strSDCardPath = System.getenv("SECONDARY_STORAGE");
+        File[] externalFilesDirs = context.getExternalFilesDirs(null);
+        for (File externalFilesDir : externalFilesDirs) {
+            if (externalFilesDir == null) continue;
+            if (externalFilesDir.getAbsolutePath().contains(strSDCardPath))
+                return externalFilesDir.getAbsolutePath();
+        }
+        return null;
+    }
+    public static String getDirectory(Context context, String option) {
+        if (context == null) return null;
+        Log.d(TAG, "getDirectory.. STORAGE_OPTION=" + option + " Context=" + context);
+        String directory;
+        switch (option) {
+            case INTERNAL_SDCARD:
+                directory = getInternalSDCardDirectory(context);
+                break;
+            case EXTERNAL_SDCARD:
+                directory = getExternalSDCardDirectory(context);
+                break;
+            case INTERNAL_SDCARD_PREFERRED:
+                directory = getInternalSDCardDirectory(context);
+                break;
+            case EXTERNAL_SDCARD_PREFERRED:
+                directory = getExternalSDCardDirectory(context);
+                if (directory == null)
+                    directory = getInternalSDCardDirectory(context);
+                break;
+            case NONE:
+                directory = null;
+                break;
+            default:
+                directory = null;
+        }
+        return directory;
+    }
+
 
     public static boolean isExist(String filename) {
         File file = new File(filename);
@@ -89,6 +149,27 @@ public class Files {
         File file=new File(filename);
         return file.delete();
     }
+    public static String getSizeString(Context context, String STORAGE_OPTION) {
+        String sdCard = getDirectory(context, STORAGE_OPTION);
+        long available=0, total=0, used=0;
+        String totalStr = "-", usedStr="-";
+        if (sdCard.equals(INTERNAL_SDCARD)) {
+            available = getAvailableSDCardSize(Environment.getExternalStorageDirectory().getAbsolutePath());
+            total = getTotalSDCardSize(Environment.getExternalStorageDirectory().getAbsolutePath());
+            used=total-available;
+            usedStr=formatSize(used);
+            totalStr=formatSize(total);
+        } else if (sdCard.equals(EXTERNAL_SDCARD)) {
+            available = getAvailableSDCardSize(getExternalSDCardDirectory(context));
+            total = getTotalSDCardSize(getExternalSDCardDirectory(context));
+            used=total-available;
+            totalStr=formatSize(total);
+            usedStr=formatSize(used);
+
+        }
+        return usedStr + " out of " + totalStr + " ( "+String.valueOf(used*100/total)+"% )";
+    }
+
     static class ListOfSomething<X> implements ParameterizedType {
 
         private Class<?> wrapped;
@@ -109,6 +190,50 @@ public class Files {
             return null;
         }
     }
+    public static long getFileSize(String path){
+        File file=new File(path);
+        long fileSize=0;
+        if(file.exists())
+            fileSize=file.length();
+        return fileSize;
+    }
+
+    public static long getAvailableSDCardSize(String path) {
+        StatFs stat = new StatFs(path);
+        long blockSize = stat.getBlockSizeLong();
+        long remainingBlocks = stat.getFreeBlocksLong();
+        return remainingBlocks * blockSize;
+    }
+    public static long getTotalSDCardSize(String path) {
+        StatFs stat = new StatFs(path);
+        long blockSize = stat.getBlockSizeLong();
+        long totalBlocks = stat.getBlockCountLong();
+        return totalBlocks * blockSize;
+    }
+
+    private static String formatSize(long size) {
+        String suffix = null;
+        if (size >= 1024) {
+            suffix = " KB";
+            size /= 1024;
+            if (size >= 1024) {
+                suffix = " MB";
+                size /= 1024;
+            }
+        }
+
+        StringBuilder resultBuffer = new StringBuilder(Long.toString(size));
+
+        int commaOffset = resultBuffer.length() - 3;
+        while (commaOffset > 0) {
+            resultBuffer.insert(commaOffset, ',');
+            commaOffset -= 3;
+        }
+
+        if (suffix != null) resultBuffer.append(suffix);
+        return resultBuffer.toString();
+    }
+
     public static void createDir(File dir) {
         if (dir.exists()) {
             return;
