@@ -75,9 +75,30 @@ public class FileManager {
         for (File externalFilesDir : externalFilesDirs) {
             if (externalFilesDir == null) continue;
             if (externalFilesDir.getAbsolutePath().contains(strSDCardPath))
-                return externalFilesDir.getAbsolutePath();
+                return externalFilesDir.getAbsolutePath()+File.separator;
         }
         return null;
+    }
+    public static String getLocationType(Context context, String option){
+        switch (option) {
+            case INTERNAL_SDCARD:
+                if(getInternalSDCardDirectory(context)==null) return null;
+                else return INTERNAL_SDCARD;
+            case EXTERNAL_SDCARD:
+                if(getExternalSDCardDirectory(context)==null) return null;
+                else return EXTERNAL_SDCARD;
+            case INTERNAL_SDCARD_PREFERRED:
+                if(getInternalSDCardDirectory(context)==null) return null;
+                else return INTERNAL_SDCARD;
+            case EXTERNAL_SDCARD_PREFERRED:
+                if(getExternalSDCardDirectory(context)!=null) return EXTERNAL_SDCARD;
+                else if(getInternalSDCardDirectory(context)!=null) return INTERNAL_SDCARD;
+                else return null;
+            case NONE:
+                return null;
+            default:
+                return null;
+        }
     }
     public static String getDirectory(Context context, String option) {
         if (context == null) return null;
@@ -106,8 +127,6 @@ public class FileManager {
         }
         return directory;
     }
-
-
     public static boolean isExist(String filename) {
         File file = new File(filename);
         return file.exists();
@@ -123,7 +142,6 @@ public class FileManager {
 
         fileOrDirectory.delete();
     }
-
     public static <T> ArrayList<T> readJSONArray(String directory, String filename, Class<T> classType) throws FileNotFoundException {
         ArrayList<T> dataSources;
         if (!isExist(directory+filename)) throw new FileNotFoundException();
@@ -132,7 +150,14 @@ public class FileManager {
         dataSources = gson.fromJson(br, new ListOfSomething<>(classType));
         return dataSources;
     }
-
+    public static <T> T readJSON(String directory, String filename, Class<T> classType) throws FileNotFoundException {
+        T data;
+        if (!isExist(directory+filename)) throw new FileNotFoundException();
+        BufferedReader br = new BufferedReader(new FileReader(directory+filename));
+        Gson gson = new Gson();
+        data = gson.fromJson(br, classType);
+        return data;
+    }
     public static <T> void writeJSONArray(String directory, String filename, ArrayList<T> data) throws IOException {
         File dir = new File(directory);
         if (!dir.exists()) {
@@ -145,12 +170,24 @@ public class FileManager {
         writer.write(json);
         writer.close();
     }
-    public static boolean delete(String filename){
+    public static <T> void writeJSON(String directory, String filename, T data) throws IOException {
+        File dir = new File(directory);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        Log.d(TAG,json);
+        FileWriter writer = new FileWriter(directory + filename);
+        writer.write(json);
+        writer.close();
+    }
+    public static boolean deleteFile(String filename){
         File file=new File(filename);
         return file.delete();
     }
-    public static String getSizeString(Context context, String STORAGE_OPTION) {
-        String sdCard = getDirectory(context, STORAGE_OPTION);
+    public static String getSDCardSizeString(Context context, String STORAGE_OPTION) {
+        String sdCard = getLocationType(context, STORAGE_OPTION);
         long available=0, total=0, used=0;
         String totalStr = "-", usedStr="-";
         if (sdCard.equals(INTERNAL_SDCARD)) {
@@ -169,7 +206,6 @@ public class FileManager {
         }
         return usedStr + " out of " + totalStr + " ( "+String.valueOf(used*100/total)+"% )";
     }
-
     static class ListOfSomething<X> implements ParameterizedType {
 
         private Class<?> wrapped;
@@ -190,14 +226,15 @@ public class FileManager {
             return null;
         }
     }
-    public static long getFileSize(String path){
+    public static long getFileSize(Context context, String STORAGE_OPTION){
+        String path=getDirectory(context, STORAGE_OPTION);
+
         File file=new File(path);
         long fileSize=0;
         if(file.exists())
             fileSize=file.length();
         return fileSize;
     }
-
     public static long getAvailableSDCardSize(String path) {
         StatFs stat = new StatFs(path);
         long blockSize = stat.getBlockSizeLong();
@@ -210,8 +247,7 @@ public class FileManager {
         long totalBlocks = stat.getBlockCountLong();
         return totalBlocks * blockSize;
     }
-
-    private static String formatSize(long size) {
+    public static String formatSize(long size) {
         String suffix = null;
         if (size >= 1024) {
             suffix = " KB";
@@ -233,7 +269,6 @@ public class FileManager {
         if (suffix != null) resultBuffer.append(suffix);
         return resultBuffer.toString();
     }
-
     public static void createDir(File dir) {
         if (dir.exists()) {
             return;
@@ -243,7 +278,6 @@ public class FileManager {
             throw new RuntimeException("Cannot create dir " + dir);
         }
     }
-
     public static void unzip(String tempFileName, String destinationPath) {
         try {
 
@@ -319,5 +353,4 @@ public class FileManager {
             Log.e("Exception", e.getMessage());
         }
     }
-
 }

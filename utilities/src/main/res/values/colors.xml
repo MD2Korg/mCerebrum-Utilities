@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="teal_50" >#E0F2F1</color>
-    <color name="teal_100">#B2DFDB</color>
+    <color name="teal_100">#b2dfdb</color>
     <color name="teal_200">#80CBC4</color>
     <color name="teal_300">#4DB6AC</color>
     <color name="teal_400">#26A69A</color>
     <color name="teal_500">#009688</color>
     <color name="teal_600">#00897B</color>
-    <color name="teal_700">#00796B</color>
+    <color name="teal_700">#00796b</color>
     <color name="teal_800">#00695C</color>
-    <color name="teal_900">#004D40</color>
+    <color name="teal_900">#004d40</color>
     <color name="teal_A100">#A7FFEB</color>
     <color name="teal_A200">#64FFDA</color>
     <color name="teal_A400">#1DE9B6</color>
@@ -95,7 +95,7 @@
     <color name="red_600">#E53935</color>
     <color name="red_700">#D32F2F</color>
     <color name="red_800">#C62828</color>
-    <color name="red_900">#B71C1C</color>
+    <color name="red_900">#b71c1c</color>
     <color name="red_A100">#FF8A80</color>
     <color name="red_A200">#FF5252</color>
     <color name="red_A400">#FF1744</color>

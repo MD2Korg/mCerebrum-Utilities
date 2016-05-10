@@ -33,6 +33,12 @@ public class Duration {
     long value;
     long min_value;
     long max_value;
+    public Duration(){}
+    public Duration(String id, String title, long value){
+        this.id=id;
+        this.title=title;
+        this.value=value;
+    }
 
     public String getId() {
         return id;
