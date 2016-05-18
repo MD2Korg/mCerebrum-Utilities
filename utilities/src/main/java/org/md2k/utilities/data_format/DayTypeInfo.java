@@ -4,17 +4,17 @@ package org.md2k.utilities.data_format;
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
  * All rights reserved.
- * <p/>
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * <p/>
+ *
  * * Redistributions of source code must retain the above copyright notice, this
  * list of conditions and the following disclaimer.
- * <p/>
+ *
  * * Redistributions in binary form must reproduce the above copyright notice,
  * this list of conditions and the following disclaimer in the documentation
  * and/or other materials provided with the distribution.
- * <p/>
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -37,16 +37,12 @@ public class DayTypeInfo {
     private String day_type_string;
     private String day_type_name;
 
+    public DayTypeInfo(int day_type) {
+        setDay_type(day_type);
+    }
+
     public int getDay_type() {
         return day_type;
-    }
-
-    public String getDay_type_string() {
-        return day_type_string;
-    }
-
-    public String getDay_type_name() {
-        return day_type_name;
     }
 
     public void setDay_type(int day_type) {
@@ -61,19 +57,25 @@ public class DayTypeInfo {
         }
     }
 
+    public String getDay_type_string() {
+        return day_type_string;
+    }
+
     public void setDay_type_string(String day_type_string) {
         this.day_type_string = day_type_string;
     }
+
+    public String getDay_type_name() {
+        return day_type_name;
+    }
+
     public boolean equals(DayTypeInfo dayTypeInfo){
         if(day_type!=dayTypeInfo.day_type)
             return false;
         return true;
     }
+
     public String log(){
         return String.valueOf(day_type)+"-"+day_type_name;
-    }
-
-    public DayTypeInfo(int day_type) {
-        setDay_type(day_type);
     }
 }
