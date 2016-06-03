@@ -28,14 +28,16 @@ package org.md2k.utilities.data_format;
  */
 public class Event {
     public static final String SMOKING ="SMOKING";
+    public static final String EATING="EATING";
     public static final String TYPE_SELF_REPORT="SELF_REPORT";
     public static final String TYPE_SYSTEM="SYSTEM";
     String event;
     String type;
+    String message;
 
 
-    public Event(String event, String type) {
-        this.event = event;this.type=type;
+    public Event(String event, String type, String message) {
+        this.event = event;this.type=type; this.message=message;
     }
 
     public String getEvent() {
@@ -44,5 +46,9 @@ public class Event {
 
     public String getType() {
         return type;
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

@@ -21,6 +21,7 @@ public class NotificationRequest {
     long duration;
     String[] message;
     NotificationResponseOption response_option;
+    NotificationRequest response_action;
 
     public String getId() {
         return id;
@@ -62,4 +63,51 @@ public class NotificationRequest {
         return response_option;
     }
 
+    public NotificationRequest getResponse_action() {
+        return response_action;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public void setDatasource(DataSource datasource) {
+        this.datasource = datasource;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public void setRepeat(int repeat) {
+        this.repeat = repeat;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
+    }
+
+    public void setMessage(String[] message) {
+        this.message = message;
+    }
+
+    public void setResponse_option(NotificationResponseOption response_option) {
+        this.response_option = response_option;
+    }
+
+    public void setResponse_action(NotificationRequest response_action) {
+        this.response_action = response_action;
+    }
 }
