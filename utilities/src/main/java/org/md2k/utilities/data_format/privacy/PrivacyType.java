@@ -1,5 +1,7 @@
 package org.md2k.utilities.data_format.privacy;
 
+import org.md2k.datakitapi.source.datasource.DataSource;
+
 import java.util.ArrayList;
 
 /**
@@ -32,7 +34,12 @@ public class PrivacyType {
     String id;
     String title;
     String summary;
-    ArrayList<Source> source;
+
+    public ArrayList<DataSource> getDatasource() {
+        return datasource;
+    }
+
+    ArrayList<DataSource> datasource;
 
     public String getId() {
         return id;
@@ -44,9 +51,5 @@ public class PrivacyType {
 
     public String getSummary() {
         return summary;
-    }
-
-    public ArrayList<Source> getSource() {
-        return source;
     }
 };

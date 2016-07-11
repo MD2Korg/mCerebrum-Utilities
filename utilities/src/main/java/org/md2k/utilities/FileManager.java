@@ -1,6 +1,7 @@
 package org.md2k.utilities;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Environment;
 import android.os.StatFs;
 
@@ -16,6 +17,8 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -280,7 +283,6 @@ public class FileManager {
     }
     public static void unzip(String tempFileName, String destinationPath) {
         try {
-
             int index = destinationPath.lastIndexOf("/");
             String fileString = destinationPath.substring(index);
 
@@ -351,6 +353,44 @@ public class FileManager {
 
         } catch (Exception e) {
             Log.e("Exception", e.getMessage());
+        }
+    }
+    public static boolean copyAssets(Context context, String filename, String destination) {
+        AssetManager assetManager = context.getAssets();
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                createDir(new File(destination));
+                in = assetManager.open(filename);
+                File outFile = new File(destination+"/"+filename);
+                out = new FileOutputStream(outFile);
+                copyFile(in, out);
+            } catch(IOException e) {
+                return false;
+            }
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        return false;
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        return false;
+                    }
+                }
+            }
+        return true;
+    }
+    private static void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+            out.write(buffer, 0, read);
         }
     }
 }

@@ -13,6 +13,22 @@
         <item name="text_view_primary_color">@style/app_theme_teal_light.text_view_primary_color</item>
         <item name="text_view_title">@style/app_theme_teal_light.text_view_title</item>
     </style>
+    <style name="app_theme_teal_light_dialog" parent="android:Theme.Holo.Light.Dialog">
+        <item name="android:windowTitleStyle">@style/dialog_window_title</item>
+    </style>
+    <style name="dialog_window_title" parent="DialogWindowTitle_Holo">
+
+    </style>
+    <style name="DialogWindowTitle_Holo">
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:textAppearance">@android:style/TextAppearance.Holo.DialogWindowTitle</item>
+    </style>
+    <style name="myTitleTextAppearance">
+        <item name="android:textColor">@android:color/holo_green_light</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:textStyle">bold</item>
+    </style>
     <style name="app_theme_teal_light.text_view_title">
         <item name="android:padding">5dp</item>
         <item name="android:background">@color/teal_700</item>
