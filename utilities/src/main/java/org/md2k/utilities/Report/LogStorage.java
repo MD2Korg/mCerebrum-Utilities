@@ -27,16 +27,17 @@ package org.md2k.utilities.Report;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import android.os.Environment;
+
 import java.io.File;
 import java.io.IOException;
 
 public class LogStorage {
+    private static final String logDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/logs/";
     private static String logfile;
-    private static String logDir;
 
-    public static void startLogFileStorageProcess(String logLocation, String applicationName) {
-        logDir = logLocation + "log/";
-        logfile = logDir + applicationName + "_" + System.currentTimeMillis() + ".log";
+    public static void startLogFileStorageProcess(String applicationName) {
+        logfile = logDir + applicationName + ".log";
 
         if (logfile != null) {
             File log = new File(logDir);
@@ -46,7 +47,7 @@ public class LogStorage {
 
             try {
                 Process process = Runtime.getRuntime().exec("logcat -c");
-                process = Runtime.getRuntime().exec("logcat -f " + logfile + " *:W"); //Log WARNING and ERROR messages to file for offline debugging support
+                process = Runtime.getRuntime().exec("logcat -n 10 -r 1024 -f " + logfile + " *:W"); //Log WARNING and ERROR messages to file for offline debugging support
             } catch (IOException e) {
                 e.printStackTrace();
             }
