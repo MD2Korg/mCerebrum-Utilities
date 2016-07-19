@@ -134,6 +134,7 @@ public class AlertDialogs {
             b.setTextColor(ContextCompat.getColor(context, R.color.teal_700));
             b.setTypeface(null, Typeface.BOLD);
         }
+
     }
     public static void AlertDialog(final Context context, String title, String message, int iconId, String positive, String negative,String neutral, final DialogInterface.OnClickListener onClickListener){
         AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
@@ -195,6 +196,7 @@ public class AlertDialogs {
         alertDialog=alertDialogBuilder.create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
+        alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         AlertDialogStyle(context, alertDialog);
     }
 
