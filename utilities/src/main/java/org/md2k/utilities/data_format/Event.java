@@ -1,5 +1,7 @@
 package org.md2k.utilities.data_format;
 
+import java.util.HashMap;
+
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -27,25 +29,27 @@ package org.md2k.utilities.data_format;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class Event {
-    public static final String SMOKING ="SMOKING";
-    public static final String EATING="EATING";
-    public static final String TYPE_SELF_REPORT="SELF_REPORT";
-    public static final String TYPE_SYSTEM="SYSTEM";
-    String event;
     String type;
+    String id;
     String message;
+    HashMap<String, String> parameters;
 
-
-    public Event(String event, String type, String message) {
-        this.event = event;this.type=type; this.message=message;
+    public Event(String type, String id, String message) {
+        this.type = type;
+        this.id = id;
+        this.message = message;
+        parameters=new HashMap<>();
     }
-
-    public String getEvent() {
-        return event;
+    public void addParameters(String key, String value){
+        parameters.put(key, value);
     }
 
     public String getType() {
         return type;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getMessage() {
