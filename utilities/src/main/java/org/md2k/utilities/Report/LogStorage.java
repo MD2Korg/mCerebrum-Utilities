@@ -47,7 +47,7 @@ public class LogStorage {
 
             try {
                 Process process = Runtime.getRuntime().exec("logcat -c");
-                process = Runtime.getRuntime().exec("logcat -n 10 -r 1024 -f " + logfile + " *:W"); //Log WARNING and ERROR messages to file for offline debugging support
+                process = Runtime.getRuntime().exec("logcat -v time -n 10 -r 1024 -f " + logfile + " *:W"); //Log WARNING and ERROR messages to file for offline debugging support
             } catch (IOException e) {
                 e.printStackTrace();
             }

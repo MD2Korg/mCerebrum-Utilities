@@ -1,13 +1,17 @@
+version = '1.0.0'
+
+
 apply plugin: 'com.android.library'
+apply from: 'versioning.gradle'
 
 android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 21
-        versionCode 3
-        versionName '0.3.0'
+        targetSdkVersion 23
+        versionCode buildVersionCode()
+        versionName version
     }
     buildTypes {
         release {
