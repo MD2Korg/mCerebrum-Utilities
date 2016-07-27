@@ -77,6 +77,7 @@ public class FileManager {
         File[] externalFilesDirs = context.getExternalFilesDirs(null);
         for (File externalFilesDir : externalFilesDirs) {
             if (externalFilesDir == null) continue;
+            if(strSDCardPath==null) return null;
             if (externalFilesDir.getAbsolutePath().contains(strSDCardPath))
                 return externalFilesDir.getAbsolutePath()+File.separator;
         }
