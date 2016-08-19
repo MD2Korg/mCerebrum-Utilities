@@ -35,6 +35,7 @@ import java.io.IOException;
 public class LogStorage {
     private static final String logDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/logs/";
     private static String logfile;
+    private static Process process;
 
     public static void startLogFileStorageProcess(String applicationName) {
         logfile = logDir + applicationName + ".log";
@@ -46,8 +47,16 @@ public class LogStorage {
             }
 
             try {
-                Process process = Runtime.getRuntime().exec("logcat -c");
-                process = Runtime.getRuntime().exec("logcat -v time -n 10 -r 1024 -f " + logfile + " *:W"); //Log WARNING and ERROR messages to file for offline debugging support
+                if (process != null) {
+                    process.destroy();
+                }
+
+                //Log WARNING and ERROR messages to file for offline debugging support
+                ProcessBuilder pb = new ProcessBuilder("logcat", "-v", "time", "-n", "10", "-r" ,"1024", "-f", logfile, "*:W");
+                pb.redirectErrorStream(true);
+
+                process = pb.start();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
