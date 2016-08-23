@@ -51,8 +51,11 @@ public class LogStorage {
                     process.destroy();
                 }
 
+                ProcessBuilder pb = new ProcessBuilder("logcat", "-c");
+                process = pb.start();
+
                 //Log WARNING and ERROR messages to file for offline debugging support
-                ProcessBuilder pb = new ProcessBuilder("logcat", "-v", "time", "-n", "10", "-r" ,"1024", "-f", logfile, "*:W");
+                pb = new ProcessBuilder("logcat", "-v", "time", "-n", "10", "-r", "1024", "-f", logfile, "*:W");
                 pb.redirectErrorStream(true);
 
                 process = pb.start();
