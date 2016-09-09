@@ -9,13 +9,19 @@
         android:theme="@style/app_theme_teal_light">
         <activity
             android:name="org.md2k.utilities.UI.ActivityAbout"
-            android:screenOrientation="portrait"
             android:icon="@drawable/ic_info_teal_48dp"
-            android:label="About"></activity>
+            android:label="About"
+            android:screenOrientation="portrait" />
         <activity
             android:name="org.md2k.utilities.UI.ActivityCopyright"
-            android:screenOrientation="portrait"
             android:icon="@drawable/ic_copyright_teal_48dp"
-            android:label="Copyright"></activity>
+            android:label="Copyright"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".permission.ActivityPermissionPrompt"
+            android:icon="@drawable/ic_warning_red_48dp"
+            android:label="Permission"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>

@@ -44,6 +44,9 @@ import org.md2k.utilities.R;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class AlertDialogs {
+    private static AlertDialog alertDialog;
+    private static int selected;
+
 /*
     public static void showAlertDialogDataKit(final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(context)
@@ -136,6 +139,7 @@ public class AlertDialogs {
         }
 
     }
+
     public static void AlertDialog(final Context context, String title, String message, int iconId, String positive, String negative,String neutral, final DialogInterface.OnClickListener onClickListener){
         AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
@@ -169,6 +173,7 @@ public class AlertDialogs {
         alertDialog.show();
         AlertDialogStyle(context, alertDialog);
     }
+
     public static void AlertDialogEditText(final Context context, String title, String message, int iconId, String positive, String negative, final OnClickListener onClickListener){
         AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
@@ -200,12 +205,16 @@ public class AlertDialogs {
         AlertDialogStyle(context, alertDialog);
     }
 
-    private static AlertDialog alertDialog;
-    private static int selected;
     public static void AlertDialogSingleChoice(final Context context, String title, String[] strings, int curSelected, String positive, String negative,final DialogInterface.OnClickListener onClickListener){
         selected=curSelected;
         alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
+                .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    @Override
+                    public void onCancel(DialogInterface dialog) {
+                        onClickListener.onClick(dialog, -1);
+                    }
+                })
                 .setNegativeButton(negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
