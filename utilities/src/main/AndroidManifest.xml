@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.md2k.utilities">
+
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
@@ -17,11 +19,5 @@
             android:icon="@drawable/ic_copyright_teal_48dp"
             android:label="Copyright"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".permission.ActivityPermissionPrompt"
-            android:icon="@drawable/ic_warning_red_48dp"
-            android:label="Permission"
-            android:screenOrientation="portrait" />
-
     </application>
 </manifest>

@@ -1,6 +1,7 @@
 package org.md2k.utilities.permission;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -37,31 +38,40 @@ import android.support.v7.app.AppCompatActivity;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-public class ActivityPermissionPrompt extends AppCompatActivity {
-    private static final String TAG = ActivityPermissionPrompt.class.getSimpleName();
+public class ActivityPermission extends Activity {
+    private static final String TAG = ActivityPermission.class.getSimpleName();
     private static final int RESULT_MANAGE_OVERLAY_PERMISSION = 5469;
     private static final int RESULT_PERMISSION = 5470;
-    String[] list;
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        list = getIntent().getStringArrayExtra(PermissionInfo.INTENT_PERMISSION_LIST);
-        if (!Settings.canDrawOverlays(this)) {
-            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                    Uri.parse("package:" + getPackageName()));
-            startActivityForResult(intent, RESULT_MANAGE_OVERLAY_PERMISSION);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            close(true);
         } else {
-            if (list != null)
-                requestPermissions(list, RESULT_PERMISSION);
-            else {
-                Intent intent = new Intent(PermissionInfo.INTENT_PERMISSION);
-                intent.putExtra(PermissionInfo.INTENT_PERMISSION_RESULT, true);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-                finish();
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                        Uri.parse("package:" + getPackageName()));
+                startActivityForResult(intent, RESULT_MANAGE_OVERLAY_PERMISSION);
+            } else {
+                String list[]=PermissionInfo.getList(this);
+                if (list != null)
+                    requestPermissions(list, RESULT_PERMISSION);
+                else
+                    close(true);
             }
         }
+    }
+
+    void close(boolean result) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(PermissionInfo.INTENT_RESULT,result);
+        setResult(Activity.RESULT_OK, resultIntent);
+        Intent intent = new Intent(PermissionInfo.INTENT_PERMISSION);
+        intent.putExtra(PermissionInfo.INTENT_PERMISSION_RESULT, result);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        finish();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -70,13 +80,9 @@ public class ActivityPermissionPrompt extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_MANAGE_OVERLAY_PERMISSION) {
             if (Settings.canDrawOverlays(this))
-                requestPermissions(list, RESULT_PERMISSION);
-            else {
-                Intent intent = new Intent(PermissionInfo.INTENT_PERMISSION);
-                intent.putExtra(PermissionInfo.INTENT_PERMISSION_LIST, false);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-                finish();
-            }
+                requestPermissions(PermissionInfo.getList(getApplicationContext()), RESULT_PERMISSION);
+            else
+                close(false);
         }
     }
 
@@ -95,10 +101,7 @@ public class ActivityPermissionPrompt extends AppCompatActivity {
                         }
                     }
                 }
-                Intent intent = new Intent(PermissionInfo.INTENT_PERMISSION);
-                intent.putExtra(PermissionInfo.INTENT_PERMISSION_RESULT, flag);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-                finish();
+                close(flag);
             }
         }
     }

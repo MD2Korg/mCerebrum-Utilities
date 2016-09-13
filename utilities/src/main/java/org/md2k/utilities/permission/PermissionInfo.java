@@ -42,9 +42,7 @@ import java.util.ArrayList;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 public class PermissionInfo {
-    public static final String INTENT_PERMISSION = "my_permission";
-    public static final String INTENT_PERMISSION_LIST = "permission_list";
-    public static final String INTENT_PERMISSION_RESULT = "permission_result";
+    public static final String INTENT_RESULT="result";
     public static final String[] PERMISSION_DANGEROUS = {
             "android.permission.ACCESS_COARSE_LOCATION",
             "android.permission.ACCESS_FINE_LOCATION",
@@ -72,9 +70,24 @@ public class PermissionInfo {
             "android.permission.WRITE_EXTERNAL_STORAGE",
             "com.android.voicemail.permission.ADD_VOICEMAIL"
     };
+
     private static final String TAG = PermissionInfo.class.getSimpleName();
-    Context context;
+    public static final String INTENT_PERMISSION = "intent_permission";
+    public static final String INTENT_PERMISSION_RESULT = "intent_permission_result";
     ResultCallback<Boolean> resultCallback;
+
+
+    public void getPermissions(Context context, ResultCallback<Boolean> resultCallback) {
+        this.resultCallback = resultCallback;
+        if (isGranted(context))
+            resultCallback.onResult(true);
+        else {
+            LocalBroadcastManager.getInstance(context).registerReceiver(receiver, new IntentFilter(INTENT_PERMISSION));
+            Intent intent = new Intent(context, ActivityPermission.class);
+            context.startActivity(intent);
+        }
+    }
+
     BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -84,39 +97,20 @@ public class PermissionInfo {
         }
     };
 
-    public PermissionInfo(Context context) {
-        this.context = context;
-    }
-
-    public void getPermissions(ResultCallback<Boolean> resultCallback) {
-        this.resultCallback = resultCallback;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            resultCallback.onResult(true);
-        else if (!isPermissionRequired())
-            resultCallback.onResult(true);
-        else {
-            String[] list = listPermissionRequired();
-            LocalBroadcastManager.getInstance(context).registerReceiver(receiver, new IntentFilter(INTENT_PERMISSION));
-            Intent intent = new Intent(context, ActivityPermissionPrompt.class);
-            intent.putExtra(INTENT_PERMISSION_LIST, list);
-            context.startActivity(intent);
-        }
-    }
-
-    private boolean isPermissionRequired() {
+    public static boolean isGranted(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (!Settings.canDrawOverlays(context)) return true;
-            if (listPermissionRequired() != null) return true;
+            if (!Settings.canDrawOverlays(context)) return false;
+            if (getList(context) != null) return false;
         }
-        return false;
+        return true;
     }
 
-    private String[] listPermissionRequired() {
+    public static String[] getList(Context context) {
         ArrayList<String> list = new ArrayList<>();
         try {
             PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_PERMISSIONS);
             for (String aList : info.requestedPermissions) {
-                if (ContextCompat.checkSelfPermission(context, aList) == PackageManager.PERMISSION_DENIED && isPermissionDangerous(aList))
+                if (ContextCompat.checkSelfPermission(context, aList) == PackageManager.PERMISSION_DENIED && isDangerous(aList))
                     list.add(aList);
             }
         } catch (Exception ignored) {
@@ -128,9 +122,9 @@ public class PermissionInfo {
         return listArray;
     }
 
-    private boolean isPermissionDangerous(String permission) {
-        for (String PERMISSION_DENGEROU : PERMISSION_DANGEROUS)
-            if (PERMISSION_DENGEROU.equals(permission))
+    private static boolean isDangerous(String permission) {
+        for (String PERMISSION_DANGEROUS : PermissionInfo.PERMISSION_DANGEROUS)
+            if (PERMISSION_DANGEROUS.equals(permission))
                 return true;
         return false;
     }
