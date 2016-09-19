@@ -193,6 +193,17 @@ public class FileManager {
         writer.write(json);
         writer.close();
     }
+    public static <T> void writeJSON(String directory, String filename, ArrayList<T> data) throws IOException {
+        File dir = new File(directory);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        Gson gson = new Gson();
+        String json = gson.toJson(data);
+        FileWriter writer = new FileWriter(directory + filename);
+        writer.write(json);
+        writer.close();
+    }
 
     public static boolean deleteFile(String filename) {
         File file = new File(filename);
