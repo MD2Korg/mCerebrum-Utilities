@@ -74,13 +74,9 @@ public class FileManager {
     }
 
     private static String getExternalSDCardDirectory(Context context) {
-        String strSDCardPath = System.getenv("SECONDARY_STORAGE");
         File[] externalFilesDirs = context.getExternalFilesDirs(null);
-        for (File externalFilesDir : externalFilesDirs) {
-            if (externalFilesDir == null) continue;
-            if (strSDCardPath == null) return null;
-            if (externalFilesDir.getAbsolutePath().contains(strSDCardPath))
-                return externalFilesDir.getAbsolutePath() + File.separator;
+        if (externalFilesDirs != null && externalFilesDirs.length >= 2) {
+            return externalFilesDirs[1].getAbsolutePath() + File.separator;
         }
         return null;
     }
@@ -220,27 +216,6 @@ public class FileManager {
         return usedStr + " out of " + totalStr + " ( " + String.valueOf(used * 100 / total) + "% )";
     }
 
-    static class ListOfSomething<X> implements ParameterizedType {
-
-        private Class<?> wrapped;
-
-        public ListOfSomething(Class<X> wrapped) {
-            this.wrapped = wrapped;
-        }
-
-        public Type[] getActualTypeArguments() {
-            return new Type[]{wrapped};
-        }
-
-        public Type getRawType() {
-            return List.class;
-        }
-
-        public Type getOwnerType() {
-            return null;
-        }
-    }
-
     public static long getFileSize(Context context, String STORAGE_OPTION) {
         String path = getDirectory(context, STORAGE_OPTION);
         long fileSize = 0;
@@ -252,6 +227,7 @@ public class FileManager {
         }
         return fileSize;
     }
+
     public static long getFileSize(Context context, String STORAGE_OPTION, String path) {
         String curPath = getDirectory(context, STORAGE_OPTION)+path;
         long fileSize = 0;
@@ -435,6 +411,27 @@ public class FileManager {
         int read;
         while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
+        }
+    }
+
+    static class ListOfSomething<X> implements ParameterizedType {
+
+        private Class<?> wrapped;
+
+        public ListOfSomething(Class<X> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        public Type[] getActualTypeArguments() {
+            return new Type[]{wrapped};
+        }
+
+        public Type getRawType() {
+            return List.class;
+        }
+
+        public Type getOwnerType() {
+            return null;
         }
     }
 }
