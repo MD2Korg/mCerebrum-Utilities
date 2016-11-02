@@ -72,7 +72,7 @@
     <color name="deeporange_900">#BF360C</color>
     <color name="deeporange_A100">#FF9E80</color>
     <color name="deeporange_A200">#FF6E40</color>
-    <color name="deeporange_A400">#FF3D00</color>
+    <color name="deeporange_A400">#ff3d00</color>
     <color name="deeporange_A700">#DD2C00</color>
 
     <color name="grey_50">#FAFAFA</color>
