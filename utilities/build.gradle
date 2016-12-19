@@ -28,4 +28,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.3.1'
     compile project(':datakitapi')
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile "com.mikepenz:iconics-core:2.8.1@aar"
+    compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
 }
