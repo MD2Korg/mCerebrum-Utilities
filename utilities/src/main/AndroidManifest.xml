@@ -4,20 +4,24 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
-        android:label="@string/app_name"
-        android:theme="@style/app_theme_teal_light">
+        android:label="@string/app_name">
         <activity
-            android:name="org.md2k.utilities.UI.ActivityAbout"
+            android:name=".UI.ActivityAbout"
             android:icon="@drawable/ic_info_teal_48dp"
             android:label="About"
             android:screenOrientation="portrait" />
         <activity
-            android:name="org.md2k.utilities.UI.ActivityCopyright"
+            android:name=".UI.ActivityCopyright"
             android:icon="@drawable/ic_copyright_teal_48dp"
             android:label="Copyright"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".about.ActivityAbout"
+            android:theme="@style/AppTheme.MaterialAboutActivity" />
     </application>
+
 </manifest>
