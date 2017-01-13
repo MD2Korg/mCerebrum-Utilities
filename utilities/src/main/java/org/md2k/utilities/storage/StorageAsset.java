@@ -5,6 +5,7 @@ import android.content.res.AssetFileDescriptor;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 
 /*
@@ -61,17 +62,16 @@ import java.util.Arrays;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-class StorageAsset extends StorageRead {
-    StorageAsset(Context context) {
+public class StorageAsset extends StorageRead {
+    public StorageAsset(Context context) {
         super(context);
     }
 
     @Override
-    protected FileInputStream open(String filePath){
-        FileInputStream in = null;
+    protected InputStream open(String filePath){
+        InputStream in = null;
         try {
-            AssetFileDescriptor fileDescriptor = context.getAssets().openFd(filePath);
-            in = fileDescriptor.createInputStream();
+            in = context.getAssets().open(filePath);
         } catch (IOException ignored) {
         }
         return in;

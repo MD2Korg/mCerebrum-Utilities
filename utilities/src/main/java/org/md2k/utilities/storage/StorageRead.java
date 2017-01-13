@@ -39,14 +39,14 @@ import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class StorageRead {
+public abstract class StorageRead {
     protected Context context;
 
     StorageRead(Context context){
         this.context=context;
     }
 
-    abstract protected FileInputStream open(String filePath);
+    abstract protected InputStream open(String filePath);
 
     abstract public boolean isExist(String filePath);
 

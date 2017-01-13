@@ -146,8 +146,8 @@ abstract class StorageReadWrite extends StorageRead {
         }
     }
 
-    private FileInputStream open(StorageType fromStorageType, String fromFilePath){
-        FileInputStream in;
+    private InputStream open(StorageType fromStorageType, String fromFilePath){
+        InputStream in;
         switch(fromStorageType){
             case ASSET: in=new StorageAsset(context).open(fromFilePath);break;
             case SDCARD_APPLICATION: in=new StorageAsset(context).open(fromFilePath);break;
@@ -160,7 +160,7 @@ abstract class StorageReadWrite extends StorageRead {
     }
 
     public boolean write(StorageType fromStorageType, String fromFilePath, String toFilePath){
-        FileInputStream in;
+        InputStream in;
         FileOutputStream out;
         if(!isExist()) return false;
         boolean success = true;
@@ -177,7 +177,7 @@ abstract class StorageReadWrite extends StorageRead {
         return success;
     }
 
-    private boolean copyBytes(FileInputStream in, OutputStream out) {
+    private boolean copyBytes(InputStream in, OutputStream out) {
         try {
             if (in == null || out == null) return false;
             byte[] buffer = new byte[1024];
@@ -253,7 +253,7 @@ abstract class StorageReadWrite extends StorageRead {
             String fullPath = getFullPath(toFilePath);
             if (fullPath == null) throw new Exception("Not exist");
             if (!createDirectory(fullPath)) throw new Exception("Can't create directory");
-            FileInputStream in=open(fromStorageType, fromFilePath);
+            InputStream in=open(fromStorageType, fromFilePath);
             byte[] buffer = new byte[1024];
             ZipInputStream zin = new ZipInputStream(in);
             ZipEntry zipentry;

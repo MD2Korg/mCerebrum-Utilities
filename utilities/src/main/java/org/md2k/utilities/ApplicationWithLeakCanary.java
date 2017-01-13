@@ -1,6 +1,7 @@
 package org.md2k.utilities;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
 
 import com.squareup.leakcanary.LeakCanary;
@@ -35,16 +36,22 @@ import com.squareup.leakcanary.LeakCanary;
 public class ApplicationWithLeakCanary extends Application {
     // Called when the application is starting, before any other application objects have been created.
     // Overriding this method is totally optional!
+    private static Context context;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        ApplicationWithLeakCanary.context = getApplicationContext();
         setupLeakCanary();
-        setupCaligraphy();
+//        setupCaligraphy();
         // Required initialization logic here!
     }
-    void setupCaligraphy(){
-
+    public static Context getAppContext() {
+        return ApplicationWithLeakCanary.context;
     }
+//    void setupCaligraphy(){
+//
+//    }
     void setupLeakCanary(){
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
