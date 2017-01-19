@@ -15,6 +15,8 @@ import org.md2k.datakitapi.messagehandler.ResultCallback;
 
 import java.util.ArrayList;
 
+import rx.Observable;
+
 /**
  * Copyright (c) 2016, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -92,8 +94,8 @@ public class PermissionInfo {
         @Override
         public void onReceive(Context context, Intent intent) {
             boolean result = intent.getBooleanExtra(INTENT_PERMISSION_RESULT, false);
-            resultCallback.onResult(result);
             LocalBroadcastManager.getInstance(context).unregisterReceiver(receiver);
+            resultCallback.onResult(result);
         }
     };
 

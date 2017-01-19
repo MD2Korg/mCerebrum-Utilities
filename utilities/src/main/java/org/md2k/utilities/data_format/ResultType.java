@@ -1,4 +1,4 @@
-package org.md2k.utilities.dialog;
+package org.md2k.utilities.data_format;
 /*
  * Copyright (c) 2016, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -26,25 +26,19 @@ package org.md2k.utilities.dialog;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import android.content.Context;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
-
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-
-import org.md2k.utilities.icon.Icon;
-
-public class DialogError extends Dialog {
-    public DialogError(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        super(context,title, content, buttonText,Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.MEDIUM), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
-            }
-        });
-        materialDialogBuilder.show();
+public class ResultType {
+    public class ActivityType{
+        public static final int STILL=0;
+        public static final int ON_FOOT=1;
+        public static final int TILTING=2;
+        public static final int WALKING=3;
+        public static final int RUNNING=4;
+        public static final int ON_BICYCLE=5;
+        public static final int IN_VEHICLE=6;
+        public static final int UNKNOWN=7;
+        int value;
+        ActivityType(int value){
+            this.value=value;
+        }
     }
 }

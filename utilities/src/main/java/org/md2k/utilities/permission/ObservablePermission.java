@@ -1,4 +1,4 @@
-package org.md2k.utilities.dialog;
+package org.md2k.utilities.permission;
 /*
  * Copyright (c) 2016, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -27,24 +27,31 @@ package org.md2k.utilities.dialog;
  */
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import org.md2k.datakitapi.messagehandler.ResultCallback;
 
-import org.md2k.utilities.icon.Icon;
+import rx.Observable;
+import rx.Subscriber;
 
-public class DialogError extends Dialog {
-    public DialogError(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        super(context,title, content, buttonText,Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.MEDIUM), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+public class ObservablePermission {
+    public static Observable<Boolean> get(final Context context) {
+
+        return Observable.create(new Observable.OnSubscribe<Boolean>() {
             @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
+            public void call(final Subscriber<? super Boolean> subscriber) {
+                PermissionInfo permissionInfo = new PermissionInfo();
+                permissionInfo.getPermissions(context, new ResultCallback<Boolean>() {
+                    @Override
+                    public void onResult(Boolean result) {
+                        if (!result)
+                            subscriber.onError(new Exception("!PERMISSION DENIED !!! Could not continue..."));
+                        else {
+                            subscriber.onNext(true);
+                            subscriber.onCompleted();
+                        }
+                    }
+                });
             }
         });
-        materialDialogBuilder.show();
     }
 }

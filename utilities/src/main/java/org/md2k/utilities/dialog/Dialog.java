@@ -36,45 +36,51 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import java.util.ArrayList;
 
 public class Dialog {
-    public static final int BUTTON_POSITIVE=0;
-    public static final int BUTTON_NEGATIVE=1;
-    public static final int BUTTON_NEUTRAL=2;
+    public static final int BUTTON_POSITIVE = 0;
+    public static final int BUTTON_NEGATIVE = 1;
+    public static final int BUTTON_NEUTRAL = 2;
     MaterialDialog.Builder materialDialogBuilder;
-    Dialog(Context context, String title, String content,String[] buttonText,Drawable icon, final DialogCallback dialogCallback){
-        materialDialogBuilder=new MaterialDialog.Builder(context).canceledOnTouchOutside(false);
-        if(title!=null)
-            materialDialogBuilder=materialDialogBuilder.title(title);
-        if(content!=null)
-            materialDialogBuilder=materialDialogBuilder.content(content);
-        if(buttonText[BUTTON_POSITIVE]!=null) {
+
+    Dialog(Context context, String title, String content, String[] buttonText, Drawable icon, final DialogCallback dialogCallback) {
+        materialDialogBuilder = new MaterialDialog.Builder(context).canceledOnTouchOutside(false);
+        if (title != null)
+            materialDialogBuilder = materialDialogBuilder.title(title);
+        if (content != null)
+            materialDialogBuilder = materialDialogBuilder.content(content);
+        if (buttonText[BUTTON_POSITIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.positiveText(buttonText[BUTTON_POSITIVE]);
             materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                    if (dialogCallback != null)
+                        dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
                 }
             });
         }
-        if(buttonText[BUTTON_NEGATIVE]!=null) {
+        if (buttonText[BUTTON_NEGATIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.negativeText(buttonText[BUTTON_NEGATIVE]);
             materialDialogBuilder = materialDialogBuilder.onNegative(new MaterialDialog.SingleButtonCallback() {
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                    dialogCallback.onDialogCallback(DialogResponse.NEGATIVE, null);
+                    if (dialogCallback != null)
+                        dialogCallback.onDialogCallback(DialogResponse.NEGATIVE, null);
                 }
             });
         }
-        if(buttonText[BUTTON_NEUTRAL]!=null) {
+        if (buttonText[BUTTON_NEUTRAL] != null) {
             materialDialogBuilder = materialDialogBuilder.neutralText(buttonText[BUTTON_NEUTRAL]);
             materialDialogBuilder = materialDialogBuilder.onNeutral(new MaterialDialog.SingleButtonCallback() {
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                    dialogCallback.onDialogCallback(DialogResponse.NEUTRAL, null);
+                    if (dialogCallback != null)
+                        dialogCallback.onDialogCallback(DialogResponse.NEUTRAL, null);
                 }
             });
         }
-        if(icon!=null)
-            materialDialogBuilder=materialDialogBuilder.icon(icon);
+        if (icon != null)
+            materialDialogBuilder = materialDialogBuilder.icon(icon);
     }
+
     public enum DialogResponse {
         POSITIVE("POSITIVE"),
         NEGATIVE("NEGATIVE"),

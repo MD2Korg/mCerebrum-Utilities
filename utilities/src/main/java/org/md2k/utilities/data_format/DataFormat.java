@@ -1,4 +1,4 @@
-package org.md2k.utilities.dialog;
+package org.md2k.utilities.data_format;
 /*
  * Copyright (c) 2016, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -26,25 +26,44 @@ package org.md2k.utilities.dialog;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import android.content.Context;
-import android.graphics.Color;
-import android.support.annotation.NonNull;
+public class DataFormat{
+    public static final int Pressure=0;
+    public static final int AmbientLight=0;
+    public static final int AmbientTemperature =0;
+    public static final int Proximity=0;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+    public class Accelerometer{
+        public static final int X=0;
+        public static final int Y=1;
+        public static final int Z=2;
+    }
+    public class Gyroscope{
+        public static final int X=0;
+        public static final int Y=1;
+        public static final int Z=2;
+    }
+    public class Compass{
+        public static final int X=0;
+        public static final int Y=1;
+        public static final int Z=2;
+    }
+    public class ActivityType{
+        public static final int Type =0;
+        public static final int Confidence =1;
+    }
 
-import org.md2k.utilities.icon.Icon;
+    public class Battery {
+        public static final int Parcentage=0;
+        public static final int Voltage=1;
+        public static final int Temperature=2;
+    }
 
-public class DialogError extends Dialog {
-    public DialogError(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        super(context,title, content, buttonText,Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.MEDIUM), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
-            }
-        });
-        materialDialogBuilder.show();
+    public class Location {
+        public static final int Latitude=0;
+        public static final int Longitude=1;
+        public static final int Altitude=2;
+        public static final int Speed=3;
+        public static final int Bearing=4;
+        public static final int Accuracy=5;
     }
 }
