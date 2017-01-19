@@ -28,15 +28,12 @@ package org.md2k.utilities.dialog;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
-import com.mikepenz.iconics.IconicsDrawable;
 
-import org.md2k.utilities.icon.Icon;
+import org.md2k.utilities.icons.Icon;
 
 public class DialogWarning extends Dialog {
     public DialogWarning(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {

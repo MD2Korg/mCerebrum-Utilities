@@ -33,7 +33,7 @@ import android.support.annotation.NonNull;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import org.md2k.utilities.icon.Icon;
+import org.md2k.utilities.icons.Icon;
 
 public class DialogInfo extends Dialog {
     public DialogInfo(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {

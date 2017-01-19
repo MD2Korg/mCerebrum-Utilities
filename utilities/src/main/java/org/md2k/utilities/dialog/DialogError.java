@@ -32,9 +32,8 @@ import android.support.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 
-import org.md2k.utilities.icon.Icon;
+import org.md2k.utilities.icons.Icon;
 
 public class DialogError extends Dialog {
     public DialogError(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
