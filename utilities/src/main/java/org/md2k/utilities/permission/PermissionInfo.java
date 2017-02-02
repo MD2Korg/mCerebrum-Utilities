@@ -84,6 +84,7 @@ public class PermissionInfo {
         else {
             LocalBroadcastManager.getInstance(context).registerReceiver(receiver, new IntentFilter(INTENT_PERMISSION));
             Intent intent = new Intent(context, ActivityPermission.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

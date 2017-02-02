@@ -7,6 +7,7 @@ import org.md2k.datakitapi.source.datasource.DataSource;
  */
 public class NotificationRequest {
     public static final String MESSAGE="MESSAGE";
+    public static final String MESSAGE_SPECIAL="MESSAGE_SPECIAL";
     public static final String VIBRATION="VIBRATION";
     public static final String TONE = "TONE";
     public static final String SCREEN="SCREEN";

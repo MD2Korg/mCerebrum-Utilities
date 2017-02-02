@@ -1,5 +1,4 @@
-package org.md2k.utilities.data_format.notification;
-
+package org.md2k.utilities.dialog;
 /*
  * Copyright (c) 2016, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
@@ -26,28 +25,7 @@ package org.md2k.utilities.data_format.notification;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class NotificationResponse {
-    public static final String OK="OK";
-    public static final String CANCEL="CANCEL";
-    public static final String DELAY = "DELAY";
-    public static final String TIMEOUT="TIMEOUT";
-    public static final String DELAY_CANCEL="DELAY_CANCEL";
-    private NotificationRequest notificationRequest;
-    private String status;
 
-    public NotificationRequest getNotificationRequest() {
-        return notificationRequest;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setNotificationRequest(NotificationRequest notificationRequest) {
-        this.notificationRequest = notificationRequest;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
+public interface DialogCallback {
+    void onDialogCallback(Dialog.DialogResponse which, String[] result);
 }

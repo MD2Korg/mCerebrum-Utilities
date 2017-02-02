@@ -1,7 +1,13 @@
-package org.md2k.utilities.data_format.notification;
+package org.md2k.utilities.info;
 
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
+import java.util.List;
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
+ * Copyright (c) 2015, The University of Memphis, MD2K Center
  * - Syed Monowar Hossain <monowar.hossain@gmail.com>
  * All rights reserved.
  *
@@ -26,28 +32,24 @@ package org.md2k.utilities.data_format.notification;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class NotificationResponse {
-    public static final String OK="OK";
-    public static final String CANCEL="CANCEL";
-    public static final String DELAY = "DELAY";
-    public static final String TIMEOUT="TIMEOUT";
-    public static final String DELAY_CANCEL="DELAY_CANCEL";
-    private NotificationRequest notificationRequest;
-    private String status;
 
-    public NotificationRequest getNotificationRequest() {
-        return notificationRequest;
+public class ServiceInfo {
+    public static boolean isServiceRunning(Context context, String serviceName) {
+        ActivityManager manager = (ActivityManager) (context.getSystemService(Context.ACTIVITY_SERVICE));
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceName.equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setNotificationRequest(NotificationRequest notificationRequest) {
-        this.notificationRequest = notificationRequest;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public static long serviceRunningTime(Context context, String serviceName) {
+        ActivityManager manager = (ActivityManager) (context.getSystemService(Context.ACTIVITY_SERVICE));
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceName.equals(service.service.getClassName())) {
+                return android.os.SystemClock.elapsedRealtime()-service.activeSince;
+            }
+        }
+        return -1;
     }
 }
