@@ -9,7 +9,7 @@ android {
     buildToolsVersion '25.0.2'
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode buildVersionCode()
         versionName version
     }
@@ -32,7 +32,7 @@ dependencies {
     //plugin for icons
     compile 'com.mikepenz:iconics-core:2.8.1@aar'
     compile 'com.mikepenz:fontawesome-typeface:4.7.0.0@aar'
-//    compile 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar'
+    compile 'com.mikepenz:google-material-typeface:2.2.0.3.original@aar'
 
     //plugin for fonts
 //    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
@@ -65,5 +65,4 @@ dependencies {
     // add rxAndroid
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
-
 }

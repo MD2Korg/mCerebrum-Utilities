@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatTextView;
@@ -159,6 +160,39 @@ public class AlertDialogs {
                         onClickListener.onClick(dialog,which);
                     }
                 });
+        if(neutral!=null){
+            alertDialogBuilder.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onClickListener.onClick(dialog,which);
+                }
+            });
+
+        }
+        alertDialog=alertDialogBuilder.create();
+        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        alertDialog.show();
+        AlertDialogStyle(context, alertDialog);
+    }
+    public static void AlertDialog(final Context context, String title, String message, Drawable iconDrawable, String positive, String negative, String neutral, final DialogInterface.OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
+                .setTitle(title)
+                .setIcon(iconDrawable)
+                .setMessage(message);
+        if(positive!=null)
+            alertDialogBuilder.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onClickListener.onClick(dialog,which);
+                }
+            });
+        if(negative!=null)
+            alertDialogBuilder.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    onClickListener.onClick(dialog,which);
+                }
+            });
         if(neutral!=null){
             alertDialogBuilder.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
                 @Override

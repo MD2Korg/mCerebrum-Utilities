@@ -32,5 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
     <string name="button_ok">Ok</string>
     <string name="status">Application Status</string>
     <string name="tap">(Please TAP to start/stop)</string>
+    <string name="text_permission">!!! PERMISSION DENIED !!! Could not continue…</string>
+    <string name="text_app_not_configured">!!! Error: Application is not configured properly !!!</string>
+    <string name="text_datakit_connection_error">!!! Error: DataKit Connection Error !!!</string>
 
 </resources>

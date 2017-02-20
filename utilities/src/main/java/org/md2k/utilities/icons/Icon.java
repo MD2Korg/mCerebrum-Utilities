@@ -30,6 +30,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.IIcon;
 
@@ -38,11 +39,17 @@ public class Icon {
     public static Drawable get(Context context, Id id, int color, Size size){
         return new IconicsDrawable(context).icon(id.value).color(color).sizeDp(size.value).paddingDp(16);
     }
-    private static Drawable get(Context context, String name, int color, Size size){
+    public static Drawable get(Context context, String name, int color, Size size){
         Drawable icon=null;
         if(name.startsWith("faw")){
             icon = new IconicsDrawable(context)
                     .icon(FontAwesome.Icon.valueOf(name))
+                    .color(color)
+                    .sizeDp(size.value)
+                    .paddingDp(16);
+        } else if(name.startsWith("gmd")){
+            icon = new IconicsDrawable(context)
+                    .icon(GoogleMaterial.Icon.valueOf(name))
                     .color(color)
                     .sizeDp(size.value)
                     .paddingDp(16);
@@ -76,8 +83,10 @@ public class Icon {
         SEARCH(FontAwesome.Icon.faw_search),
         SUCCESS_CIRCLE(FontAwesome.Icon.faw_check_circle),
         USER(FontAwesome.Icon.faw_user),
-        WARNING_TRIANGLE(FontAwesome.Icon.faw_exclamation_triangle);
-        private IIcon value;;
+        WARNING_TRIANGLE(FontAwesome.Icon.faw_exclamation_triangle),
+        EATING(GoogleMaterial.Icon.gmd_local_dining),
+        SMOKING(GoogleMaterial.Icon.gmd_smoking_rooms);
+        private IIcon value;
         private Id(IIcon value){
             this.value = value;
         }
