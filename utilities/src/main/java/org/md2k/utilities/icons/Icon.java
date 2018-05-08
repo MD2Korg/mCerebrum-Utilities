@@ -1,7 +1,6 @@
-package org.md2k.utilities.icons;
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +25,8 @@ package org.md2k.utilities.icons;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.icons;
+
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -34,13 +35,32 @@ import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.iconics.typeface.IIcon;
 
-
+/**
+ * Provides methods for getting icons and enumeration classes for <code>Size</code> and <code>Id</code>.
+ */
 public class Icon {
+    /**
+     * Returns the icon specified by the given parameters.
+     * @param context Android context
+     * @param id Id of the desired icon
+     * @param color Color of the icon
+     * @param size Size of the icon
+     * @return The icon specified by the given parameters.
+     */
     public static Drawable get(Context context, Id id, int color, Size size){
         return new IconicsDrawable(context).icon(id.value).color(color).sizeDp(size.value).paddingDp(16);
     }
+
+    /**
+     * Returns the icon specified by the given parameters.
+     * @param context Android context
+     * @param name Name of the desired icon
+     * @param color Color of the icon
+     * @param size Size of the icon
+     * @return The icon specified by the given parameters.
+     */
     public static Drawable get(Context context, String name, int color, Size size){
-        Drawable icon=null;
+        Drawable icon = null;
         if(name.startsWith("faw")){
             icon = new IconicsDrawable(context)
                     .icon(FontAwesome.Icon.valueOf(name))
@@ -56,6 +76,17 @@ public class Icon {
         }
         return icon;
     }
+
+    /**
+     * Defines several <code>Size</code> values.
+     * <ul>
+     *     <li><code>EXTRA_SMALL</code> = 12</li>
+     *     <li><code>SMALL</code> = 24</li>
+     *     <li><code>MEDIUM</code> = 48</li>
+     *     <li><code>LARGE</code> = 72</li>
+     *     <li><code>EXTRA_LARGE</code> = 96</li>
+     * </ul>
+     */
     public enum Size {
         EXTRA_SMALL(12), SMALL(24), MEDIUM(48), LARGE(72), EXTRA_LARGE(96);
         private int value;
@@ -64,6 +95,32 @@ public class Icon {
         }
     }
 
+    /**
+     * Defines several <code>Id</code> values.
+     * <ul>
+     *     <li><code>ABOUT</code></li>
+     *     <li><code>BLUETOOTH</code></li>
+     *     <li><code>BUG</code></li>
+     *     <li><code>CHECK</code></li>
+     *     <li><code>CHECK_CIRCLE</code></li>
+     *     <li><code>COPYRIGHT</code></li>
+     *     <li><code>DESCRIPTION</code></li>
+     *     <li><code>ERROR_CIRCLE</code></li>
+     *     <li><code>GITHUB</code></li>
+     *     <li><code>HOME</code></li>
+     *     <li><code>INFO_CIRCLE</code></li>
+     *     <li><code>OK_CIRCLE</code></li>
+     *     <li><code>POWER</code></li>
+     *     <li><code>QUESTION_CIRCLE</code></li>
+     *     <li><code>REFRESH</code></li>
+     *     <li><code>SEARCH</code></li>
+     *     <li><code>SUCCESS_CIRCLE</code></li>
+     *     <li><code>USER</code></li>
+     *     <li><code>WARNING_TRIANGLE</code></li>
+     *     <li><code>EATING</code></li>
+     *     <li><code>SMOKING</code></li>
+     * </ul>
+     */
     public enum Id {
         ABOUT(FontAwesome.Icon.faw_info_circle),
         BLUETOOTH(FontAwesome.Icon.faw_bluetooth),
