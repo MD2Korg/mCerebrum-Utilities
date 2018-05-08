@@ -1,10 +1,6 @@
-package org.md2k.utilities;
-
-import android.os.Environment;
-
 /*
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,15 +24,19 @@ import android.os.Environment;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-public class Constants {
-    public static String VERSION_CODE="version_code";
-    public static String VERSION_NAME="version_name";
-    public static String APP_NAME="app_name";
-    public static String APP_DESCRIPTION="app_description";
-    public static String APP_DEVELOPER="app_developer";
-    public static String URL_RELEASE="url_release";
-    public static String URL_SOURCECODE="url_sourcecode";
-    public static String DIRECTORY=Environment.getExternalStorageDirectory().getAbsolutePath() + "/mCerebrum/";
-    public static String CONFIG_DIRECTORY= DIRECTORY+"config/";
 
+package org.md2k.utilities;
+
+import android.os.Environment;
+
+public class Constants {
+    public static String VERSION_CODE = "version_code";
+    public static String VERSION_NAME = "version_name";
+    public static String APP_NAME = "app_name";
+    public static String APP_DESCRIPTION = "app_description";
+    public static String APP_DEVELOPER = "app_developer";
+    public static String URL_RELEASE = "url_release";
+    public static String URL_SOURCECODE = "url_sourcecode";
+    public static String DIRECTORY = Environment.getExternalStorageDirectory().getAbsolutePath() + "/mCerebrum/";
+    public static String CONFIG_DIRECTORY = DIRECTORY + "config/";
 }
