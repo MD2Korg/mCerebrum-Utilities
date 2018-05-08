@@ -1,7 +1,6 @@
-package org.md2k.utilities.dialog;
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +25,8 @@ package org.md2k.utilities.dialog;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.dialog;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -46,21 +47,37 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ *
+ */
 public class Dialog {
     public static final int BUTTON_POSITIVE = 0;
     public static final int BUTTON_NEGATIVE = 1;
     public static final int BUTTON_NEUTRAL = 2;
     private DatePicker datePicker;
 
-    public MaterialDialog.Builder SingleChoice(Context context, String title, String content, String[] items, String selectedItem,String[] buttonText, Drawable icon, final DialogCallback dialogCallback){
-        MaterialDialog.Builder materialDialogBuilder=setDefault(context,title, content,buttonText, icon, dialogCallback);
-        int selected=0;
-        for(int i=0;i<items.length && selectedItem!=null;i++)
+    /**
+     * @param context Android context
+     * @param title
+     * @param content
+     * @param items
+     * @param selectedItem
+     * @param buttonText
+     * @param icon
+     * @param dialogCallback
+     * @return
+     */
+    public MaterialDialog.Builder SingleChoice(Context context, String title, String content,
+                                               String[] items, String selectedItem,String[] buttonText,
+                                               Drawable icon, final DialogCallback dialogCallback){
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content,buttonText, icon, dialogCallback);
+        int selected = 0;
+        for(int i = 0; i < items.length && selectedItem != null; i++)
             if(items[i].equals(selectedItem))
-                selected=i;
+                selected = i;
         List<String> list = Arrays.asList(items);
         CharSequence[] cs = list.toArray(new CharSequence[list.size()]);
-        materialDialogBuilder=materialDialogBuilder.items(cs)
+        materialDialogBuilder = materialDialogBuilder.items(cs)
                 .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallbackSingleChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
@@ -70,19 +87,22 @@ public class Dialog {
                 });
         return materialDialogBuilder;
     }
+
     public MaterialDialog.Builder ProgressIndeterminate(Context context, String title, String content){
         return new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
                 .progress(true, 0);
     }
-    public MaterialDialog.Builder EditText(Context context, String title, String content, String hint, String selectedText, Drawable icon, final DialogCallback dialogCallback){
-        MaterialDialog.Builder materialDialogBuilder=setDefault(context, title, content, new String[]{"Ok", "Cancel"}, icon, new DialogCallback() {
+
+    public MaterialDialog.Builder EditText(Context context, String title, String content, String hint,
+                                           String selectedText, Drawable icon, final DialogCallback dialogCallback){
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context, title, content,
+                new String[]{"Ok", "Cancel"}, icon, new DialogCallback() {
             @Override
             public void onDialogCallback(DialogResponse which, String[] result) {
-                if(which==DialogResponse.POSITIVE){
-
-                }else{
+                if(which == DialogResponse.POSITIVE){}
+                else {
                     dialogCallback.onDialogCallback(which, null);
                 }
             }
@@ -96,9 +116,12 @@ public class Dialog {
                 });
         return materialDialogBuilder;
     }
-    public MaterialDialog.Builder Error(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder=setDefault(context,title, content, buttonText, Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.SMALL), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+
+    public MaterialDialog.Builder Error(Context context, String title, String content, String[] buttonText,
+                                        final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
+                Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.SMALL), dialogCallback);
+        materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
@@ -106,9 +129,12 @@ public class Dialog {
         });
         return materialDialogBuilder;
     }
-    public MaterialDialog.Builder Info(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context,title, content, buttonText,Icon.get(context,Icon.Id.INFO_CIRCLE, Color.parseColor("#03A9F4"), Icon.Size.SMALL), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+
+    public MaterialDialog.Builder Info(Context context, String title, String content, String[] buttonText,
+                                       final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
+                Icon.get(context,Icon.Id.INFO_CIRCLE, Color.parseColor("#03A9F4"), Icon.Size.SMALL), dialogCallback);
+        materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -116,12 +142,15 @@ public class Dialog {
         });
         return materialDialogBuilder;
     }
-    public MaterialDialog.Builder MultiChoice(Context context, String title, String content, String[] items, Drawable icon, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context,title, content, new String[]{"Select","Cancel",null}, icon, dialogCallback);
+
+    public MaterialDialog.Builder MultiChoice(Context context, String title, String content, String[] items,
+                                              Drawable icon, final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content,
+                new String[]{"Select","Cancel",null}, icon, dialogCallback);
         List<String> list = Arrays.asList(items);
         CharSequence[] cs = list.toArray(new CharSequence[list.size()]);
 
-        materialDialogBuilder=materialDialogBuilder.items(cs)
+        materialDialogBuilder = materialDialogBuilder.items(cs)
                 .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
                     @Override
                     public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
@@ -131,9 +160,12 @@ public class Dialog {
                 });
         return materialDialogBuilder;
     }
-    public MaterialDialog.Builder Question(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context,title, content, buttonText,Icon.get(context,Icon.Id.QUESTION_CIRCLE, Color.parseColor("#2196F3"), Icon.Size.SMALL), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+
+    public MaterialDialog.Builder Question(Context context, String title, String content, String[] buttonText,
+                                           final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
+                Icon.get(context,Icon.Id.QUESTION_CIRCLE, Color.parseColor("#2196F3"), Icon.Size.SMALL), dialogCallback);
+        materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -141,9 +173,12 @@ public class Dialog {
         });
         return materialDialogBuilder;
     }
-    public MaterialDialog.Builder DialogSuccess(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context,title, content, buttonText,Icon.get(context,Icon.Id.SUCCESS_CIRCLE, Color.parseColor("#4CAF50"), Icon.Size.SMALL), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+
+    public MaterialDialog.Builder DialogSuccess(Context context, String title, String content,
+                                                String[] buttonText, final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
+                Icon.get(context,Icon.Id.SUCCESS_CIRCLE, Color.parseColor("#4CAF50"), Icon.Size.SMALL), dialogCallback);
+        materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -151,9 +186,13 @@ public class Dialog {
         });
         return materialDialogBuilder;
     }
+
     private TimePicker timePicker;
-    public MaterialDialog TimePicker(Context context, String title, String selectedTime, Drawable icon, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context, title, null, new String[]{"Select", "Cancel", null}, icon, dialogCallback);
+
+    public MaterialDialog TimePicker(Context context, String title, String selectedTime, Drawable icon,
+                                     final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder =setDefault(context, title, null,
+                new String[]{"Select", "Cancel", null}, icon, dialogCallback);
 
         materialDialogBuilder = materialDialogBuilder.customView(R.layout.dialog_timepicker, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -162,7 +201,7 @@ public class Dialog {
                         int hour = timePicker.getCurrentHour();
                         int minute = timePicker.getCurrentMinute();
                         String timeString = String.format(Locale.US, "%02d:%02d:00", hour, minute);
-                        System.out.println("Time = "+ timeString);
+                        System.out.println("Time = " + timeString);
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE, new String[]{timeString});
 
                     }
@@ -171,9 +210,12 @@ public class Dialog {
         timePicker = (TimePicker) materialDialog.findViewById(R.id.timePicker);
         return materialDialog;
     }
-    public MaterialDialog.Builder DialogWarning(Context context, String title, String content, String[] buttonText, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder =setDefault(context,title, content, buttonText,Icon.get(context,Icon.Id.WARNING_TRIANGLE, Color.parseColor("#FF9800"), Icon.Size.SMALL), dialogCallback);
-        materialDialogBuilder=materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+
+    public MaterialDialog.Builder DialogWarning(Context context, String title, String content, String[] buttonText,
+                                                final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
+                Icon.get(context,Icon.Id.WARNING_TRIANGLE, Color.parseColor("#FF9800"), Icon.Size.SMALL), dialogCallback);
+        materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -182,8 +224,10 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
-    public MaterialDialog DatePicker(Context context, String title, String selectedTime, Drawable icon, final DialogCallback dialogCallback) {
-        MaterialDialog.Builder materialDialogBuilder= setDefault(context, title, null, new String[]{"Select", "Cancel", null}, icon, dialogCallback);
+    public MaterialDialog DatePicker(Context context, String title, String selectedTime, Drawable icon,
+                                     final DialogCallback dialogCallback) {
+        MaterialDialog.Builder materialDialogBuilder = setDefault(context, title, null,
+                new String[]{"Select", "Cancel", null}, icon, dialogCallback);
         materialDialogBuilder = materialDialogBuilder.customView(R.layout.dialog_datepicker, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
@@ -192,9 +236,8 @@ public class Dialog {
                         int month = datePicker.getMonth()+1;
                         int dayOfMonth = datePicker.getDayOfMonth();
                         String givenDateString = String.format(Locale.US, "%02d-%02d-%d", month, dayOfMonth, year);
-                        System.out.println("Date = "+ givenDateString);
+                        System.out.println("Date = " + givenDateString);
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE, new String[]{givenDateString});
-
                     }
                 });
         MaterialDialog materialDialog = materialDialogBuilder.build();
@@ -202,13 +245,23 @@ public class Dialog {
         return materialDialog;
     }
 
-    private MaterialDialog.Builder setDefault(Context context, String title, String content, String[] buttonText, Drawable icon, final DialogCallback dialogCallback) {
+    /**
+     * @param context
+     * @param title
+     * @param content
+     * @param buttonText
+     * @param icon
+     * @param dialogCallback
+     * @return
+     */
+    private MaterialDialog.Builder setDefault(Context context, String title, String content,
+                                              String[] buttonText, Drawable icon, final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = new MaterialDialog.Builder(context).canceledOnTouchOutside(false);
         if (title != null)
             materialDialogBuilder = materialDialogBuilder.title(title);
         if (content != null)
             materialDialogBuilder = materialDialogBuilder.content(content);
-        if (buttonText!=null && buttonText.length>BUTTON_POSITIVE && buttonText[BUTTON_POSITIVE] != null) {
+        if (buttonText!= null && buttonText.length>BUTTON_POSITIVE && buttonText[BUTTON_POSITIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.positiveText(buttonText[BUTTON_POSITIVE]);
             materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
                 @Override
@@ -218,7 +271,7 @@ public class Dialog {
                 }
             });
         }
-        if (buttonText!=null && buttonText.length>BUTTON_NEGATIVE && buttonText[BUTTON_NEGATIVE] != null) {
+        if (buttonText!= null && buttonText.length>BUTTON_NEGATIVE && buttonText[BUTTON_NEGATIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.negativeText(buttonText[BUTTON_NEGATIVE]);
             materialDialogBuilder = materialDialogBuilder.onNegative(new MaterialDialog.SingleButtonCallback() {
                 @Override
@@ -228,7 +281,7 @@ public class Dialog {
                 }
             });
         }
-        if (buttonText!=null && buttonText.length>BUTTON_NEUTRAL && buttonText[BUTTON_NEUTRAL] != null) {
+        if (buttonText != null && buttonText.length>BUTTON_NEUTRAL && buttonText[BUTTON_NEUTRAL] != null) {
             materialDialogBuilder = materialDialogBuilder.neutralText(buttonText[BUTTON_NEUTRAL]);
             materialDialogBuilder = materialDialogBuilder.onNeutral(new MaterialDialog.SingleButtonCallback() {
                 @Override
@@ -243,6 +296,9 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     *
+     */
     public enum DialogResponse {
         POSITIVE("POSITIVE"),
         NEGATIVE("NEGATIVE"),
@@ -259,5 +315,4 @@ public class Dialog {
             return stringValue;
         }
     }
-
 }
