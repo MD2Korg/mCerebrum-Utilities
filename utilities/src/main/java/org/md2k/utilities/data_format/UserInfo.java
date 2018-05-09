@@ -1,8 +1,6 @@
-package org.md2k.utilities.data_format;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,27 +24,54 @@ package org.md2k.utilities.data_format;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format;
+
+/**
+ * Provides user identification information.
+ */
 public class UserInfo {
     String user_id;
     String uuid;
 
+    /**
+     * Constructor
+     *
+     * <p> Initializes <code>user_id</code> and <code>uuid</code> to null. </p>
+     */
     public UserInfo() {
         user_id = null;
         uuid = null;
     }
 
+    /**
+     * Returns the user identifier.
+     * @return The user identifier.
+     */
     public String getUser_id() {
         return user_id;
     }
 
+    /**
+     * Sets the user identifier.
+     * @param user_id The user identifier.
+     */
     public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
+    /**
+     * Returns the UUID.
+     * @return The UUID.
+     */
     public String getUuid() {
         return uuid;
     }
 
+    /**
+     * Sets the UUID.
+     * @param uuid The UUID.
+     */
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
