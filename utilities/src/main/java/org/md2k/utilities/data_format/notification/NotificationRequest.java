@@ -124,104 +124,104 @@ public class NotificationRequest {
     }
 
     /**
-     * Returns 
-     * @return
+     * Returns the response option.
+     * @return The response option.
      */
     public NotificationResponseOption getResponse_option() {
         return response_option;
     }
 
     /**
-     * Returns
-     * @return
+     * Returns the response action.
+     * @return The response action.
      */
     public NotificationRequest getResponse_action() {
         return response_action;
     }
 
     /**
-     * Sets
-     * @param id
+     * Sets the id.
+     * @param id Notificiation id.
      */
     public void setId(String id) {
         this.id = id;
     }
 
     /**
-     * Sets
-     * @param name
+     * Sets the name.
+     * @param name Notification name.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Sets
-     * @param type
+     * Sets the type.
+     * @param type Notificiation type.
      */
     public void setType(String type) {
         this.type = type;
     }
 
     /**
-     * Sets
-     * @param priority
+     * Sets the priority.
+     * @param priority Notification priority value.
      */
     public void setPriority(int priority) {
         this.priority = priority;
     }
 
     /**
-     * Sets
-     * @param datasource
+     * Sets the <code>DataSource</code>.
+     * @param datasource Notification's <code>DataSource</code>.
      */
     public void setDatasource(DataSource datasource) {
         this.datasource = datasource;
     }
 
     /**
-     * Sets
-     * @param format
+     * Sets the format.
+     * @param format Notification format.
      */
     public void setFormat(String format) {
         this.format = format;
     }
 
     /**
-     * Sets
-     * @param repeat
+     * Sets the repeat.
+     * @param repeat Number of times to repeat the notification.
      */
     public void setRepeat(int repeat) {
         this.repeat = repeat;
     }
 
     /**
-     * Sets
-     * @param duration
+     * Sets the duration.
+     * @param duration Time to display the notification.
      */
     public void setDuration(long duration) {
         this.duration = duration;
     }
 
     /**
-     * Sets
-     * @param message
+     * Sets the message.
+     * @param message Notification message.
      */
     public void setMessage(String[] message) {
         this.message = message;
     }
 
     /**
-     * Sets
-     * @param response_option
+     * Sets the response option.
+     * @param response_option Response options for the notification.
      */
     public void setResponse_option(NotificationResponseOption response_option) {
         this.response_option = response_option;
     }
 
     /**
-     * Sets
-     * @param response_action
+     * Sets the response action.
+     * @param response_action Response action for the notification.
      */
     public void setResponse_action(NotificationRequest response_action) {
         this.response_action = response_action;
