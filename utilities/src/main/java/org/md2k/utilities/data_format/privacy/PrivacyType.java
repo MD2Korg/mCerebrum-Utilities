@@ -1,12 +1,6 @@
-package org.md2k.utilities.data_format.privacy;
-
-import org.md2k.datakitapi.source.datasource.DataSource;
-
-import java.util.ArrayList;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,25 +24,62 @@ import java.util.ArrayList;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format.privacy;
+
+import org.md2k.datakitapi.source.datasource.DataSource;
+
+import java.util.ArrayList;
+
+/**
+ * Defines what type of privacy is being used.
+ *
+ * <p>
+ *     Privacy types can be made of any combination of:
+ *     <ul>
+ *         <li>Location</li>
+ *         <li>Activity</li>
+ *         <li>Chest Sensor</li>
+ *         <li>Wrist Sensors</li>
+ *         <li>Surveys</li>
+ *     </ul>
+ * </p>
+ */
 public class PrivacyType {
     String id;
     String title;
     String summary;
 
+    /**
+     * Returns an arraylist of <code>DataSource</code>s.
+     * @return An arraylist of <code>DataSource</code>s.
+     */
     public ArrayList<DataSource> getDatasource() {
         return datasource;
     }
 
     ArrayList<DataSource> datasource;
 
+    /**
+     * Returns the identifier.
+     * @return The identifier.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Returns the title.
+     * @return The title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Returns the summary.
+     * @return The summary.
+     */
     public String getSummary() {
         return summary;
     }
