@@ -1,8 +1,6 @@
-package org.md2k.utilities.data_format.notification;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +24,12 @@ package org.md2k.utilities.data_format.notification;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format.notification;
+
+/**
+ * Provides methods for constructing a notification response.
+ */
 public class NotificationResponse {
     public static final String OK="OK";
     public static final String CANCEL="CANCEL";
@@ -35,18 +39,34 @@ public class NotificationResponse {
     private NotificationRequest notificationRequest;
     private String status;
 
+    /**
+     * Returns the <code>NotificationRequest</code> for this <code>NotificationResponse</code>.
+     * @return The <code>NotificationRequest</code> for this <code>NotificationResponse</code>.
+     */
     public NotificationRequest getNotificationRequest() {
         return notificationRequest;
     }
 
+    /**
+     * Returns the status.
+     * @return The status.
+     */
     public String getStatus() {
         return status;
     }
 
+    /**
+     * Sets the <code>NotificationRequest</code> for this <code>NotificationResponse</code>.
+     * @param notificationRequest The <code>NotificationRequest</code> for this <code>NotificationResponse</code>.
+     */
     public void setNotificationRequest(NotificationRequest notificationRequest) {
         this.notificationRequest = notificationRequest;
     }
 
+    /**
+     * Sets the notification status.
+     * @param status The new notification status.
+     */
     public void setStatus(String status) {
         this.status = status;
     }
