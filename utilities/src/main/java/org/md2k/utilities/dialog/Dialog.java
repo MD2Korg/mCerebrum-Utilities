@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- *
+ * Provides methods for creating dialogs and capturing user intaction with them.
  */
 public class Dialog {
     public static final int BUTTON_POSITIVE = 0;
@@ -57,15 +57,16 @@ public class Dialog {
     private DatePicker datePicker;
 
     /**
-     * @param context Android context
-     * @param title
-     * @param content
-     * @param items
-     * @param selectedItem
-     * @param buttonText
-     * @param icon
-     * @param dialogCallback
-     * @return
+     * Creates a single choice dialog.
+     * @param context Android context.
+     * @param title Dialog title.
+     * @param content Dialog content.
+     * @param items Array of dialog items.
+     * @param selectedItem Item to be selected.
+     * @param buttonText Text on the dialog button.
+     * @param icon Dialog icon.
+     * @param dialogCallback Dialog callback interface.
+     * @return A builder for a <code>MaterialDialog</code>.
      */
     public MaterialDialog.Builder SingleChoice(Context context, String title, String content,
                                                String[] items, String selectedItem,String[] buttonText,
@@ -79,6 +80,14 @@ public class Dialog {
         CharSequence[] cs = list.toArray(new CharSequence[list.size()]);
         materialDialogBuilder = materialDialogBuilder.items(cs)
                 .itemsCallbackSingleChoice(selected, new MaterialDialog.ListCallbackSingleChoice() {
+                    /**
+                     * Passes the selected text to the dialog callback interface.
+                     * @param dialog Dialog receiving input.
+                     * @param view A builder object for a <code>MaterialDialog</code>.
+                     * @param which Dialog action that was clicked.
+                     * @param text Button text.
+                     * @return Always returns true.
+                     */
                     @Override
                     public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE,new String[]{text.toString()});
@@ -88,6 +97,13 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates an indeterminate progress dialog.
+     * @param context Android context.
+     * @param title Dialog title.
+     * @param content Dialog content.
+     * @return A builder object for a <code>MaterialDialog</code>
+     */
     public MaterialDialog.Builder ProgressIndeterminate(Context context, String title, String content){
         return new MaterialDialog.Builder(context)
                 .title(title)
@@ -95,10 +111,26 @@ public class Dialog {
                 .progress(true, 0);
     }
 
+    /**
+     * Creates a dialog that allows the user to change a text field.
+     * @param context Android context.
+     * @param title Dialog title.
+     * @param content Dialog content.
+     * @param hint
+     * @param selectedText
+     * @param icon
+     * @param dialogCallback
+     * @return
+     */
     public MaterialDialog.Builder EditText(Context context, String title, String content, String hint,
                                            String selectedText, Drawable icon, final DialogCallback dialogCallback){
         MaterialDialog.Builder materialDialogBuilder = setDefault(context, title, content,
                 new String[]{"Ok", "Cancel"}, icon, new DialogCallback() {
+                    /**
+                     *
+                     * @param which Dialog action that was clicked.
+                     * @param result
+                     */
             @Override
             public void onDialogCallback(DialogResponse which, String[] result) {
                 if(which == DialogResponse.POSITIVE){}
@@ -109,6 +141,11 @@ public class Dialog {
         });
         materialDialogBuilder = materialDialogBuilder.inputType(InputType.TYPE_CLASS_TEXT)
                 .input(hint, selectedText, false, new MaterialDialog.InputCallback() {
+                    /**
+                     * Passes the input to the dialog callback interface as a string.
+                     * @param dialog Dialog receiving input.
+                     * @param input Input to be parsed.
+                     */
                     @Override
                     public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE,new String[]{input.toString()});
