@@ -1,15 +1,6 @@
-package org.md2k.utilities.storage;
-
-import android.content.Context;
-import android.os.Environment;
-
-import org.md2k.utilities.storage.StorageReadWrite;
-
-import java.io.FileInputStream;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,11 +25,32 @@ import java.io.FileInputStream;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.storage;
+
+import android.content.Context;
+import android.os.Environment;
+
+import org.md2k.utilities.storage.StorageReadWrite;
+
+import java.io.FileInputStream;
+
+
+/**
+ * Object for representing internal SD card storage
+ */
 public class StorageSDCardInternal extends StorageReadWrite {
+    /**
+     * Constructor
+     * @param context Android context
+     */
     public StorageSDCardInternal(Context context){
         super(context);
     }
 
+    /**
+     * Returns the file path to the root directory.
+     * @return The file path to the root directory.
+     */
     @Override
     protected String getRootDirectory() {
         String directory = null;
