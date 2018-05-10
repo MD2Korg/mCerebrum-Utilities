@@ -34,14 +34,30 @@ import org.md2k.datakitapi.messagehandler.ResultCallback;
 import rx.Observable;
 import rx.Subscriber;
 
+/**
+ * Gets permissions using an <code>Observable</code>.
+ */
 public class ObservablePermission {
+    /**
+     * Gets permissions using an <code>Observable</code>.
+     * @param context Android context
+     * @return An <code>Observable</code>.
+     */
     public static Observable<Boolean> get(final Context context) {
 
         return Observable.create(new Observable.OnSubscribe<Boolean>() {
+            /**
+             * Creates a <code>PermissionInfo</code> object to get permessions.
+             * @param subscriber Subscriber for permissions.
+             */
             @Override
             public void call(final Subscriber<? super Boolean> subscriber) {
                 PermissionInfo permissionInfo = new PermissionInfo();
                 permissionInfo.getPermissions(context, new ResultCallback<Boolean>() {
+                    /**
+                     * Checks whether permissions have been granted.
+                     * @param result Result from the <code>ResultCallback</code>.
+                     */
                     @Override
                     public void onResult(Boolean result) {
                         if (!result)
