@@ -1,7 +1,6 @@
-package org.md2k.utilities.storage;
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,15 +25,28 @@ package org.md2k.utilities.storage;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.storage;
+
 import android.content.Context;
 
 import org.md2k.utilities.storage.StorageReadWrite;
 
+/**
+ * Object for representing an application's storage
+ */
 public class StorageApplication extends StorageReadWrite {
+    /**
+     * Constructor
+     * @param context Android context
+     */
     public StorageApplication(Context context) {
         super(context);
     }
 
+    /**
+     * Returns the path to the root directory.
+     * @return The path to the root directory.
+     */
     @Override
     protected String getRootDirectory() {
         return context.getFilesDir().getAbsolutePath();
