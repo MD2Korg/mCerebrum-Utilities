@@ -1,10 +1,6 @@
-package org.md2k.utilities.storage;
-
-import android.content.Context;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,16 +25,31 @@ import android.content.Context;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.storage;
+
+import android.content.Context;
+
+/**
+ * Object for representing external SD card storage
+ */
 class StorageSDCardExternalPreferred extends StorageReadWrite {
+    /**
+     * Constructor
+     * @param context Android context
+     */
     StorageSDCardExternalPreferred(Context context){
         super(context);
     }
 
+    /**
+     * Returns the file path to the root directory.
+     * @return The file path to the root directory.
+     */
     @Override
     protected String getRootDirectory() {
         String rootDirectory = new StorageSDCardExternal(context).getRootDirectory();
-        if(rootDirectory==null)
-            rootDirectory=new StorageSDCardInternal(context).getRootDirectory();
+        if(rootDirectory == null)
+            rootDirectory = new StorageSDCardInternal(context).getRootDirectory();
         return rootDirectory;
     }
 }
