@@ -28,7 +28,7 @@
 package org.md2k.utilities.data_format.notification;
 
 /**
- *
+ * Provides methods for determining the response actions for the notification
  */
 public class NotificationResponseAction {
     String type;
@@ -61,8 +61,8 @@ public class NotificationResponseAction {
     }
 
     /**
-     * Returns
-     * @return
+     * Returns the <code>notification</code> field.
+     * @return The <code>notification</code> field.
      */
     public boolean isNotification() {
         return notification;
@@ -93,8 +93,8 @@ public class NotificationResponseAction {
     }
 
     /**
-     * Sets the
-     * @param notification
+     * Sets the <code>notification</code>.
+     * @param notification New <code>notification</code> value.
      */
     public void setNotification(boolean notification) {
         this.notification = notification;
