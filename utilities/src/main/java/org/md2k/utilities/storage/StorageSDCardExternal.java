@@ -1,14 +1,6 @@
-package org.md2k.utilities.storage;
-
-import android.content.Context;
-
-import org.md2k.utilities.storage.StorageReadWrite;
-
-import java.io.File;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,18 +25,39 @@ import java.io.File;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.storage;
+
+import android.content.Context;
+
+import org.md2k.utilities.storage.StorageReadWrite;
+
+import java.io.File;
+
+/**
+ * Object for representing external SD card storage
+ */
 class StorageSDCardExternal extends StorageReadWrite {
+    /**
+     * Constructor
+     * @param context Android context
+     */
     StorageSDCardExternal(Context context){
         super(context);
     }
 
+    /**
+     * Returns the file path to the root directory.
+     * @return The file path to the root directory.
+     */
     @Override
     protected String getRootDirectory() {
         String strSDCardPath = System.getenv("SECONDARY_STORAGE");
         File[] externalFilesDirs = context.getExternalFilesDirs(null);
         for (File externalFilesDir : externalFilesDirs) {
-            if (externalFilesDir == null) continue;
-            if (strSDCardPath == null) return null;
+            if (externalFilesDir == null)
+                continue;
+            if (strSDCardPath == null)
+                return null;
             if (externalFilesDir.getAbsolutePath().contains(strSDCardPath))
                 return externalFilesDir.getAbsolutePath();
         }
