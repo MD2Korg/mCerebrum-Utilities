@@ -31,7 +31,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
- *
+ * Allows reading and writing of <code>SharedPreferences</code>
  */
 public class SharedPreference {
     /**
