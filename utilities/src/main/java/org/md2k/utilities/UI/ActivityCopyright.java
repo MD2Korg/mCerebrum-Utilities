@@ -1,16 +1,6 @@
-package org.md2k.utilities.UI;
-
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-
-import org.md2k.utilities.R;
-
 /*
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,36 +24,72 @@ import org.md2k.utilities.R;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.UI;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+
+import org.md2k.utilities.R;
+
+/**
+ * Creates an activity to tell the user about copyright information.
+ */
 public class ActivityCopyright extends AppCompatActivity {
-    // Activity tag used by logging APIs
+
     private static final String TAG = ActivityCopyright.class.getSimpleName();
 
+    /**
+     * Calls <code>setButtons()</code> on activity creation.
+     * @param savedInstanceState Previous state of the application if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        // Initialize the layout
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_copyright);
         setButtons();
 
-        if(getSupportActionBar()!=null)
+        if(getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+    /**
+     * Creates a "Close" button.
+     */
     void setButtons(){
-        Button button=(Button)findViewById(R.id.button_1);
+        Button button = (Button)findViewById(R.id.button_1);
         button.setText("Close");
         button.setOnClickListener(new View.OnClickListener() {
+            /**
+             * Closes the activity when pressed.
+             * @param v Button to be pressed.
+             */
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
     }
+
+    /**
+     * Handles the selection of items on the action bar.
+     *
+     * <p>
+     *     Handle action bar item clicks here. The action bar will automatically handle clicks on
+     *     the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
+     * </p>
+     *
+     * @param item Android MenuItem object
+     * @return False to allow normal menu processing to proceed, true to consume it here.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 finish();
                 return true;
