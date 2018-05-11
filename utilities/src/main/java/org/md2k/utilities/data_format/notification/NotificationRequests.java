@@ -30,7 +30,7 @@ package org.md2k.utilities.data_format.notification;
 import java.util.ArrayList;
 
 /**
- * Creates an object for aggregating <code>NatificationRequest</code> objects.
+ * Creates an object for aggregating <code>NotificationRequest</code> objects.
  */
 public class NotificationRequests {
     ArrayList<NotificationRequest> notification_option;
