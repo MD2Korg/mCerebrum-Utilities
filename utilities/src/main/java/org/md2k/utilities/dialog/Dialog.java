@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Provides methods for creating dialogs and capturing user intaction with them.
+ * Provides methods for creating dialogs and capturing user interaction with them.
  */
 public class Dialog {
     public static final int BUTTON_POSITIVE = 0;
@@ -65,7 +65,7 @@ public class Dialog {
      * @param selectedItem Item to be selected.
      * @param buttonText Text on the dialog button.
      * @param icon Dialog icon.
-     * @param dialogCallback Dialog callback interface.
+     * @param dialogCallback Callback interface for the dialog. Dialog callback interface.
      * @return A builder for a <code>MaterialDialog</code>.
      */
     public MaterialDialog.Builder SingleChoice(Context context, String title, String content,
@@ -116,10 +116,10 @@ public class Dialog {
      * @param context Android context.
      * @param title Dialog title.
      * @param content Dialog content.
-     * @param hint
-     * @param selectedText
-     * @param icon
-     * @param dialogCallback
+     * @param hint Hint text for the input.
+     * @param selectedText Input text.
+     * @param icon Dialog icon.
+     * @param dialogCallback Callback interface for the dialog.
      * @return
      */
     public MaterialDialog.Builder EditText(Context context, String title, String content, String hint,
@@ -127,9 +127,9 @@ public class Dialog {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context, title, content,
                 new String[]{"Ok", "Cancel"}, icon, new DialogCallback() {
                     /**
-                     *
+                     * Passes the dialog action to the callback interface if the response is not positive.
                      * @param which Dialog action that was clicked.
-                     * @param result
+                     * @param result Array of possible results.
                      */
             @Override
             public void onDialogCallback(DialogResponse which, String[] result) {
@@ -154,11 +154,25 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a <code>Builder</code> for an error dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder Error(Context context, String title, String content, String[] buttonText,
                                         final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
                 Icon.get(context,Icon.Id.ERROR_CIRCLE, Color.parseColor("#F44336"), Icon.Size.SMALL), dialogCallback);
         materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            /**
+             * Passes the positive button click to the listener.
+             * @param dialog Dialog clicked
+             * @param which Which response was selected.
+             */
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE, null);
@@ -167,11 +181,25 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a <code>Builder</code> for an info dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder Info(Context context, String title, String content, String[] buttonText,
                                        final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
                 Icon.get(context,Icon.Id.INFO_CIRCLE, Color.parseColor("#03A9F4"), Icon.Size.SMALL), dialogCallback);
         materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            /**
+             * Passes the positive button click to the listener.
+             * @param dialog Dialog clicked
+             * @param which Which response was selected.
+             */
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -180,6 +208,16 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a <code>Builder</code> for a multi choice dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param items Array of choices
+     * @param icon Icon for the dialog
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder MultiChoice(Context context, String title, String content, String[] items,
                                               Drawable icon, final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content,
@@ -189,6 +227,13 @@ public class Dialog {
 
         materialDialogBuilder = materialDialogBuilder.items(cs)
                 .itemsCallbackMultiChoice(null, new MaterialDialog.ListCallbackMultiChoice() {
+                    /**
+                     * Passes the selected choice to the callback interface.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     * @param text Text of the selected choice.
+                     * @return Always returns true.
+                     */
                     @Override
                     public boolean onSelection(MaterialDialog dialog, Integer[] which, CharSequence[] text) {
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE, (String[]) text);
@@ -198,11 +243,25 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a <code>Builder</code> for a question dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder Question(Context context, String title, String content, String[] buttonText,
                                            final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
                 Icon.get(context,Icon.Id.QUESTION_CIRCLE, Color.parseColor("#2196F3"), Icon.Size.SMALL), dialogCallback);
         materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            /**
+             * Passes the positive button click to the listener.
+             * @param dialog Dialog clicked
+             * @param which Which response was selected.
+             */
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -211,11 +270,25 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a <code>Builder</code> for a success dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder DialogSuccess(Context context, String title, String content,
                                                 String[] buttonText, final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
                 Icon.get(context,Icon.Id.SUCCESS_CIRCLE, Color.parseColor("#4CAF50"), Icon.Size.SMALL), dialogCallback);
         materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            /**
+             * Passes the positive button click to the listener.
+             * @param dialog Dialog clicked
+             * @param which Which response was selected.
+             */
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -226,6 +299,15 @@ public class Dialog {
 
     private TimePicker timePicker;
 
+    /**
+     * Creates a dialog for picking dates.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param selectedTime Time selected
+     * @param icon Icon of the dialog
+     * @param dialogCallback Callback interface for the dialog
+     * @return A constructed <code>MaterialDialog</code>.
+     */
     public MaterialDialog TimePicker(Context context, String title, String selectedTime, Drawable icon,
                                      final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder =setDefault(context, title, null,
@@ -233,6 +315,11 @@ public class Dialog {
 
         materialDialogBuilder = materialDialogBuilder.customView(R.layout.dialog_timepicker, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    /**
+                     * Passes the positive button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         int hour = timePicker.getCurrentHour();
@@ -248,11 +335,25 @@ public class Dialog {
         return materialDialog;
     }
 
+    /**
+     * Creates a <code>Builder</code> for a warning dialog.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
+     */
     public MaterialDialog.Builder DialogWarning(Context context, String title, String content, String[] buttonText,
                                                 final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context,title, content, buttonText,
                 Icon.get(context,Icon.Id.WARNING_TRIANGLE, Color.parseColor("#FF9800"), Icon.Size.SMALL), dialogCallback);
         materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+            /**
+             * Passes the positive button click to the listener.
+             * @param dialog Dialog clicked
+             * @param which Which response was selected.
+             */
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 dialogCallback.onDialogCallback(DialogResponse.POSITIVE,null);
@@ -261,12 +362,26 @@ public class Dialog {
         return materialDialogBuilder;
     }
 
+    /**
+     * Creates a dialog for picking dates.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param selectedTime Time selected
+     * @param icon Icon of the dialog
+     * @param dialogCallback Callback interface for the dialog
+     * @return A constructed <code>MaterialDialog</code>.
+     */
     public MaterialDialog DatePicker(Context context, String title, String selectedTime, Drawable icon,
                                      final DialogCallback dialogCallback) {
         MaterialDialog.Builder materialDialogBuilder = setDefault(context, title, null,
                 new String[]{"Select", "Cancel", null}, icon, dialogCallback);
         materialDialogBuilder = materialDialogBuilder.customView(R.layout.dialog_datepicker, false)
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    /**
+                     * Passes the positive button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         int year = datePicker.getYear();
@@ -283,13 +398,14 @@ public class Dialog {
     }
 
     /**
-     * @param context
-     * @param title
-     * @param content
-     * @param buttonText
-     * @param icon
-     * @param dialogCallback
-     * @return
+     * Sets default values for a <code>MaterialDialog</code>.
+     * @param context Android context
+     * @param title Dialog title
+     * @param content Dialog content
+     * @param buttonText Button text
+     * @param icon Dialog icon.
+     * @param dialogCallback Callback interface for the dialog.
+     * @return A <code>Builder</code> for a <code>MaterialDialog</code>.
      */
     private MaterialDialog.Builder setDefault(Context context, String title, String content,
                                               String[] buttonText, Drawable icon, final DialogCallback dialogCallback) {
@@ -301,6 +417,11 @@ public class Dialog {
         if (buttonText!= null && buttonText.length>BUTTON_POSITIVE && buttonText[BUTTON_POSITIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.positiveText(buttonText[BUTTON_POSITIVE]);
             materialDialogBuilder = materialDialogBuilder.onPositive(new MaterialDialog.SingleButtonCallback() {
+                /**
+                 * Passes the positive button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                     if (dialogCallback != null)
@@ -311,6 +432,11 @@ public class Dialog {
         if (buttonText!= null && buttonText.length>BUTTON_NEGATIVE && buttonText[BUTTON_NEGATIVE] != null) {
             materialDialogBuilder = materialDialogBuilder.negativeText(buttonText[BUTTON_NEGATIVE]);
             materialDialogBuilder = materialDialogBuilder.onNegative(new MaterialDialog.SingleButtonCallback() {
+                /**
+                 * Passes the negative button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                     if (dialogCallback != null)
@@ -321,6 +447,11 @@ public class Dialog {
         if (buttonText != null && buttonText.length>BUTTON_NEUTRAL && buttonText[BUTTON_NEUTRAL] != null) {
             materialDialogBuilder = materialDialogBuilder.neutralText(buttonText[BUTTON_NEUTRAL]);
             materialDialogBuilder = materialDialogBuilder.onNeutral(new MaterialDialog.SingleButtonCallback() {
+                /**
+                 * Passes the neutral button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                     if (dialogCallback != null)
@@ -334,7 +465,12 @@ public class Dialog {
     }
 
     /**
-     *
+     * Enumeration of possible dialog responses
+     * <ul>
+     *     <li>Positive</li>
+     *     <li>Negative</li>
+     *     <li>Neutral</li>
+     * </ul>
      */
     public enum DialogResponse {
         POSITIVE("POSITIVE"),
@@ -343,10 +479,18 @@ public class Dialog {
 
         private String stringValue;
 
+        /**
+         * Constructor
+         * @param toString String value of the response.
+         */
         DialogResponse(String toString) {
             stringValue = toString;
         }
 
+        /**
+         * Returns the response as a string.
+         * @return The response as a string.
+         */
         @Override
         public String toString() {
             return stringValue;
