@@ -29,6 +29,20 @@ package org.md2k.utilities;
 
 import android.os.Environment;
 
+/**
+ * Provides constants
+ * <ul>
+ *     <li><code>VERSION_CODE</code> = "version_code"</li>
+ *     <li><code>VERSION_NAME</code> = "version_name"</li>
+ *     <li><code>APP_NAME</code> = "app_name"</li>
+ *     <li><code>APP_DESCRIPTION</code> = "app_description"</li>
+ *     <li><code>APP_DEVELOPER</code> = "app_developer"</li>
+ *     <li><code>URL_RELEASE</code> = "url_release"</li>
+ *     <li><code>URL_SOURCECODE</code> = "url_sourcecode"</li>
+ *     <li><code>DIRECTORY</code> = the path to "/mCerebrum/"</li>
+ *     <li><code>CONFIG_DIRECTORY</code> = DIRECTORY + "config/"</li>
+ * </ul>
+ */
 public class Constants {
     public static String VERSION_CODE = "version_code";
     public static String VERSION_NAME = "version_name";
