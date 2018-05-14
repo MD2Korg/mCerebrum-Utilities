@@ -1,14 +1,6 @@
-package org.md2k.utilities.info;
-
-import android.app.ActivityManager;
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-
-import java.util.List;
 /*
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,7 +25,25 @@ import java.util.List;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.info;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
+import java.util.List;
+
+/**
+ * Provides methods for getting execution information for a service.
+ */
 public class ServiceInfo {
+    /**
+     * Returns whether the given service is running or not.
+     * @param context Android context
+     * @param serviceName Name of service
+     * @return Whether the given service is running or not.
+     */
     public static boolean isServiceRunning(Context context, String serviceName) {
         ActivityManager manager = (ActivityManager) (context.getSystemService(Context.ACTIVITY_SERVICE));
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
@@ -43,6 +53,13 @@ public class ServiceInfo {
         }
         return false;
     }
+
+    /**
+     * Returns the running time for the given service.
+     * @param context Android context
+     * @param serviceName Name of service
+     * @return The running time for the given service.
+     */
     public static long serviceRunningTime(Context context, String serviceName) {
         ActivityManager manager = (ActivityManager) (context.getSystemService(Context.ACTIVITY_SERVICE));
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {

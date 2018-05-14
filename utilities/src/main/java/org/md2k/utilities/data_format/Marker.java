@@ -1,10 +1,6 @@
-package org.md2k.utilities.data_format;
-
-import org.md2k.datakitapi.time.DateTime;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,29 +24,76 @@ import org.md2k.datakitapi.time.DateTime;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format;
+
+import org.md2k.datakitapi.time.DateTime;
+
+/**
+ * Defines an activity marker.
+ * <p>
+ *     Current activity markers are:
+ *     <ul>
+ *         <li>Smoking</li>
+ *         <li>Sleep</li>
+ *         <li>Wakeup</li>
+ *     </ul>
+ * </p>
+ */
 public class Marker {
+    /** Constant for smoking marker. <p>"SMOKING"</p> */
     public static final String SMOKING = "SMOKING";
+
+    /** Constant for sleeping marker. <p>"SLEEP"</p> */
     public static final String SLEEP = "SLEEP";
-    public static final String WAKEUP="WAKEUP";
+
+    /** Constant for wakeup marker. <p>"WAKEUP"</p> */
+    public static final String WAKEUP = "WAKEUP";
+
+    /** Marker type. */
     String type;
+
+    /** Marker timestamp. */
     long timestamp;
+
+    /**
+     * Constructor
+     *
+     * @param type Marker type.
+     */
     public Marker(String type){
-        this.type=type;
-        timestamp= DateTime.getDateTime();
+        this.type = type;
+        timestamp = System.currentTimeMillis();
     }
 
+    /**
+     * Returns the marker type.
+     * @return The marker type.
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Sets the marker type.
+     * @param type The marker type.
+     */
     public void setType(String type) {
         this.type = type;
     }
 
+    /**
+     * Returns the timestamp.
+     * @return The timestamp.
+     */
     public long getTimestamp() {
         return timestamp;
     }
 
+    /**
+     * Sets the timestamp.
+     * @param timestamp The timestamp.
+     */
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }

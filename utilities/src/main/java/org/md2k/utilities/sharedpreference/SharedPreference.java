@@ -1,11 +1,6 @@
-package org.md2k.utilities.sharedpreference;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,53 +25,135 @@ import android.content.SharedPreferences;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.sharedpreference;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+/**
+ * Allows reading and writing of <code>SharedPreferences</code>
+ */
 public class SharedPreference {
+    /**
+     * Writes the key-value pair to <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param value Value
+     */
     public static void write(Context context, String key, boolean value){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putBoolean(key, value);
         editor.apply();
     }
+
+    /**
+     * Writes the key-value pair to <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param value Value
+     */
     public static void write(Context context, String key, int value){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt(key, value);
         editor.apply();
     }
+
+    /**
+     * Writes the key-value pair to <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param value Value
+     */
     public static void write(Context context, String key, long value){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putLong(key, value);
         editor.apply();
     }
+
+    /**
+     * Writes the key-value pair to <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param value Value
+     */
     public static void write(Context context, String key, float value){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putFloat(key, value);
         editor.apply();
     }
+
+    /**
+     * Writes the key-value pair to <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param value Value
+     */
     public static void write(Context context, String key, String value){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString(key, value);
         editor.apply();
     }
+
+    /**
+     * Reads the value associated with the given key-value pair from <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param defaultValue Value
+     * @return The given value from <code>SharedPreferences</code>
+     */
     public static boolean readBoolean(Context context, String key, boolean defaultValue){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         return sharedPref.getBoolean(key, defaultValue);
     }
+
+    /**
+     * Reads the value associated with the given key-value pair from <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param defaultValue Value
+     * @return The given value from <code>SharedPreferences</code>
+     */
     public static int readInt(Context context, String key, int defaultValue){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         return sharedPref.getInt(key, defaultValue);
     }
+
+    /**
+     * Reads the value associated with the given key-value pair from <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param defaultValue Value
+     * @return The given value from <code>SharedPreferences</code>
+     */
     public static long readLong(Context context, String key, long defaultValue){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         return sharedPref.getLong(key, defaultValue);
     }
+
+    /**
+     * Reads the value associated with the given key-value pair from <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param defaultValue Value
+     * @return The given value from <code>SharedPreferences</code>
+     */
     public static float readFloat(Context context, String key, float defaultValue){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         return sharedPref.getFloat(key, defaultValue);
     }
+
+    /**
+     * Reads the value associated with the given key-value pair from <code>SharedPreferences</code>.
+     * @param context Android context
+     * @param key Key
+     * @param defaultValue Value
+     * @return The given value from <code>SharedPreferences</code>
+     */
     public static String readString(Context context, String key, String defaultValue){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
         return sharedPref.getString(key,defaultValue);

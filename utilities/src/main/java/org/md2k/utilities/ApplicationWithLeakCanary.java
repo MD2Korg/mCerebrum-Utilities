@@ -1,14 +1,6 @@
-package org.md2k.utilities;
-
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Configuration;
-
-import com.squareup.leakcanary.LeakCanary;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,44 +25,61 @@ import com.squareup.leakcanary.LeakCanary;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities;
+
+import android.app.Application;
+import android.content.Context;
+import android.content.res.Configuration;
+
+import com.squareup.leakcanary.LeakCanary;
+
+/**
+ * Provides methods that implement <code>LeakCanary</code> in this application.
+ * More information about <code>LeakCanary</code> can be found <a href="https://github.com/square/leakcanary">here</a>.
+ */
 public class ApplicationWithLeakCanary extends Application {
-    // Called when the application is starting, before any other application objects have been created.
-    // Overriding this method is totally optional!
     private static Context context;
 
+    /**
+     * Sets the context of this object as the application context and calls <code>setupLeakCanary()</code>.
+     */
     @Override
     public void onCreate() {
         super.onCreate();
         ApplicationWithLeakCanary.context = getApplicationContext();
         setupLeakCanary();
-//        setupCaligraphy();
-        // Required initialization logic here!
     }
+
+    /**
+     * Returns the context of this object.
+     * @return The context of this object.
+     */
     public static Context getAppContext() {
         return ApplicationWithLeakCanary.context;
     }
-//    void setupCaligraphy(){
-//
-//    }
+
+    /**
+     * Sets <code>LeakCanary</code> up for heap analysis.
+     */
     void setupLeakCanary(){
         if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
             return;
         }
         LeakCanary.install(this);
     }
 
-    // Called by the system when the device configuration changes while your component is running.
-    // Overriding this method is totally optional!
+    /**
+     * Called by the system when the device configuration changes while your component is running.
+     * @param newConfig New device configuration.
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
     }
 
-    // This is called when the overall system is running low on memory,
-    // and would like actively running processes to tighten their belts.
-    // Overriding this method is totally optional!
+    /**
+     * Called when the overall system is running low on memory.
+     */
     @Override
     public void onLowMemory() {
         super.onLowMemory();

@@ -1,8 +1,6 @@
-package org.md2k.utilities.data_format;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,13 +24,35 @@ package org.md2k.utilities.data_format;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format;
+
+/**
+ * Provides constants for describing the quality of the collected data.
+ */
 public class DATA_QUALITY {
+    /** Good data quality <p>Default is 0.</p> */
     public static final int GOOD = 0;
+
+    /** Noisy data quality <p>Default is 1.</p> */
     public static final int NOISE = 1;
+
+    /** Bad data quality <p>Default is 2.</p> */
     public static final int BAD = 2;
+
+    /** Data collecting band off <p>Default is 3.</p> */
     public static final int BAND_OFF = 3;
-    public static final int MISSING=4;
+
+    /** Data missing <p>Default is 4.</p> */
+    public static final int MISSING = 4;
+
+    /** Data collecting band not worn <p>Default is 5.</p> */
     public static final int NOT_WORN = 5;
+
+    /** Data collecting band loose <p>Default is 6.</p> */
     public static final int BAND_LOOSE = 6;
-    public static final String METADATA_STR =" GOOD(0), NOISE(1), BAD(2), BAND_OFF(3), MISSING(4), NOT_WORN(5), BAND_LOOSE(6)";
+
+    /** String of all data quality grades. */
+    public static final String METADATA_STR =" GOOD(0), NOISE(1), BAD(2), BAND_OFF(3), " +
+            "MISSING(4), NOT_WORN(5), BAND_LOOSE(6)";
 }

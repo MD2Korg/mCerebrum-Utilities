@@ -1,8 +1,6 @@
-package org.md2k.utilities.data_format.privacy;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +24,12 @@ package org.md2k.utilities.data_format.privacy;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format.privacy;
+
+/**
+ * Provides methods for getting information about the duration of a privacy event.
+ */
 public class Duration {
     String id;
     String title;
@@ -33,33 +37,69 @@ public class Duration {
     long value;
     long min_value;
     long max_value;
+
+    /**
+     * Constructor
+     * Blank
+     */
     public Duration(){}
+
+    /**
+     * Constructor
+     * @param id Identifier
+     * @param title Title
+     * @param value Value of the duration.
+     */
     public Duration(String id, String title, long value){
-        this.id=id;
-        this.title=title;
-        this.value=value;
+        this.id = id;
+        this.title = title;
+        this.value = value;
     }
 
+    /**
+     * Returns the id.
+     * @return The id.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Returns the title.
+     * @return The title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Returns the summary.
+     * @return The summary.
+     */
     public String getSummary() {
         return summary;
     }
 
+    /**
+     * Returns the value.
+     * @return The value.
+     */
     public long getValue() {
         return value;
     }
 
+    /**
+     * Returns the minimum duration value.
+     * @return The minimum duration value.
+     */
     public long getMin_value() {
         return min_value;
     }
 
+    /**
+     * Returns the maximum duration value.
+     * @return The maximum duration value.
+     */
     public long getMax_value() {
         return max_value;
     }

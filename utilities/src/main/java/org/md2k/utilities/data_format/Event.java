@@ -1,10 +1,6 @@
-package org.md2k.utilities.data_format;
-
-import java.util.HashMap;
-
-/**
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+/*
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -28,30 +24,71 @@ import java.util.HashMap;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.data_format;
+
+import java.util.HashMap;
+
+/**
+ * Defines a data collection event.
+ */
 public class Event {
+    /** Type of event. */
     String type;
+
+    /** Event identifier. */
     String id;
+
+    /** Message for the event. */
     String message;
+
+    /** HashMap of event parameters. */
     HashMap<String, String> parameters;
 
+    /**
+     * Constructor
+     *
+     * @param type Event type.
+     * @param id Event identifier.
+     * @param message Event message.
+     */
     public Event(String type, String id, String message) {
         this.type = type;
         this.id = id;
         this.message = message;
-        parameters=new HashMap<>();
+        parameters = new HashMap<>();
     }
+
+    /**
+     * Adds a parameter to the hashMap.
+     *
+     * @param key Key for the parameter.
+     * @param value Value of the parameter.
+     */
     public void addParameters(String key, String value){
         parameters.put(key, value);
     }
 
+    /**
+     * Returns the event type.
+     * @return The event type.
+     */
     public String getType() {
         return type;
     }
 
+    /**
+     * Returns the event identifier.
+     * @return The event identifier.
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * Returns the event message.
+     * @return The event message.
+     */
     public String getMessage() {
         return message;
     }

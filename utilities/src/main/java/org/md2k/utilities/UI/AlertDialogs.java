@@ -1,26 +1,6 @@
-package org.md2k.utilities.UI;
-
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatTextView;
-import android.view.Gravity;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import org.md2k.utilities.R;
-
 /*
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -44,81 +24,56 @@ import org.md2k.utilities.R;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.UI;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.AppCompatTextView;
+import android.view.Gravity;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.md2k.utilities.R;
+
+/**
+ * Provides methods for styling and recieving responses to <code>AlertDialog</code>s.
+ */
 public class AlertDialogs {
     private static AlertDialog alertDialog;
     private static int selected;
 
-/*
-    public static void showAlertDialogDataKit(final Context context){
-        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setTitle("Error: DataKit")
-//                .setIcon(R.drawable.ic_error_outline_white_24dp)
-                .setMessage("DataKit is not installed.\n\n Please install DataKit")
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .create();
-
-        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        alertDialog.show();
-    }
-    public static void showAlertDialog(final Context context, String title, String message){
-        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setIcon(R.drawable.ic_error_red_50dp)
-                .setMessage(message)
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                })
-                .create();
-        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        alertDialog.show();
-    }
-    public static void showAlertDialogConfirm(final Context context, String title, String message, String positive, String negative,final DialogInterface.OnClickListener onClickListener){
-        AlertDialog alertDialog = new AlertDialog.Builder(context)
-                .setTitle(title)
-                .setIcon(R.drawable.ic_info_teal_48dp)
-                .setMessage(message)
-                .setNegativeButton(negative, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        onClickListener.onClick(dialog,which);
-                    }
-                })
-                .setPositiveButton(positive, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        onClickListener.onClick(dialog,which);
-                    }
-                })
-                .create();
-        int titleDividerId = context.getResources().getIdentifier("titleDivider", "id", "android");
-        View titleDivider = alertDialog.findViewById(titleDividerId);
-        if (titleDivider != null)
-            titleDivider.setBackgroundColor(context.getResources().getColor(R.color.deeporange_A400));
-
-        alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
-        alertDialog.show();
-    }
-*/
+    /**
+     * Defines the style of the dialog.
+     * @param context Android context
+     * @param alertDialog <code>AlertDialog</code> to style.
+     */
     public static void AlertDialogStyle(Context context, AlertDialog alertDialog){
-        int titleDividerId = alertDialog.getContext().getResources().getIdentifier("titleDivider", "id", "android");
+        int titleDividerId = alertDialog.getContext().getResources()
+                .getIdentifier("titleDivider", "id", "android");
         View titleDivider = alertDialog.getWindow().getDecorView().findViewById(titleDividerId);
         if (titleDivider != null) {
             titleDivider.setBackgroundColor(ContextCompat.getColor(context, R.color.deeporange_100));
             titleDivider.setVisibility(View.VISIBLE);
         }
-        int textViewId = alertDialog.getContext().getResources().getIdentifier("android:id/alertTitle", null, null);
+        int textViewId = alertDialog.getContext().getResources()
+                .getIdentifier("android:id/alertTitle", null, null);
         TextView tv = (TextView) alertDialog.findViewById(textViewId);
         tv.setTextColor(ContextCompat.getColor(context, R.color.teal_700));
 
-        int textViewMsgId = alertDialog.getContext().getResources().getIdentifier("android:id/message", null, null);
+        int textViewMsgId = alertDialog.getContext().getResources()
+                .getIdentifier("android:id/message", null, null);
         TextView tvMsg = (TextView) alertDialog.findViewById(textViewMsgId);
-        if(tvMsg!=null) {
+        if(tvMsg != null) {
             tvMsg.setTextSize(16);
             tvMsg.setGravity(Gravity.CENTER);
             tvMsg.setTextColor(ContextCompat.getColor(context, R.color.black));
@@ -138,30 +93,58 @@ public class AlertDialogs {
             b.setTextColor(ContextCompat.getColor(context, R.color.teal_700));
             b.setTypeface(null, Typeface.BOLD);
         }
-
     }
 
-    public static void AlertDialog(final Context context, String title, String message, int iconId, String positive, String negative,String neutral, final DialogInterface.OnClickListener onClickListener){
-        AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
+    /**
+     * Constructs an <code>AlertDialog</code>.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param message Message of the dialog
+     * @param iconId Icon identifier of the dialog
+     * @param positive Positive response
+     * @param negative Negative response
+     * @param neutral Neutral response
+     * @param onClickListener Listener for button clicks.
+     */
+    public static void AlertDialog(final Context context, String title, String message, int iconId,
+                                   String positive, String negative,String neutral,
+                                   final DialogInterface.OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper
+                (context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
                 .setIcon(iconId)
                 .setMessage(message);
-        if(positive!=null)
+        if(positive != null)
             alertDialogBuilder.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the positive button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which);
                 }
             });
-        if(negative!=null)
+        if(negative != null)
                 alertDialogBuilder.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                    /**
+                     * Passes the negative button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         onClickListener.onClick(dialog,which);
                     }
                 });
-        if(neutral!=null){
+        if(neutral != null){
             alertDialogBuilder.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the neutral button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which);
@@ -169,32 +152,62 @@ public class AlertDialogs {
             });
 
         }
-        alertDialog=alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
         AlertDialogStyle(context, alertDialog);
     }
-    public static void AlertDialog(final Context context, String title, String message, Drawable iconDrawable, String positive, String negative, String neutral, final DialogInterface.OnClickListener onClickListener){
-        AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
+
+    /**
+     * Constructs an <code>AlertDialog</code>.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param message Message of the dialog
+     * @param iconDrawable Icon of the dialog
+     * @param positive Positive response
+     * @param negative Negative response
+     * @param neutral Neutral response
+     * @param onClickListener Listener for button clicks.
+     */
+    public static void AlertDialog(final Context context, String title, String message, Drawable iconDrawable,
+                                   String positive, String negative, String neutral,
+                                   final DialogInterface.OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper
+                (context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
                 .setIcon(iconDrawable)
                 .setMessage(message);
-        if(positive!=null)
+        if(positive != null)
             alertDialogBuilder.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the positive button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which);
                 }
             });
-        if(negative!=null)
+        if(negative != null)
             alertDialogBuilder.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the negative button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which);
                 }
             });
-        if(neutral!=null){
+        if(neutral != null){
             alertDialogBuilder.setNeutralButton(neutral, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the neutral button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which);
@@ -202,14 +215,27 @@ public class AlertDialogs {
             });
 
         }
-        alertDialog=alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
         AlertDialogStyle(context, alertDialog);
     }
 
-    public static void AlertDialogEditText(final Context context, String title, String message, int iconId, String positive, String negative, final OnClickListener onClickListener){
-        AlertDialog.Builder alertDialogBuilder= new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
+    /**
+     * Constructs an <code>AlertDialog</code>.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param message Message of the dialog
+     * @param iconId Icon identifier of the dialog
+     * @param positive Positive response
+     * @param negative Negative response
+     * @param onClickListener Listener for button clicks.
+     */
+    public static void AlertDialogEditText(final Context context, String title, String message,
+                                           int iconId, String positive, String negative,
+                                           final OnClickListener onClickListener){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper
+                (context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
                 .setIcon(iconId)
                 .setMessage(message);
@@ -217,53 +243,94 @@ public class AlertDialogs {
         input.setSingleLine();
         alertDialogBuilder.setView(input);
 
-        if(positive!=null)
+        if(positive != null)
             alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the positive button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String str = input.getText().toString().trim();
                     onClickListener.onClick(dialog,which, str);
                 }
             });
-        if(negative!=null)
+        if(negative != null)
             alertDialogBuilder.setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                /**
+                 * Passes the negative button click to the listener.
+                 * @param dialog Dialog clicked
+                 * @param which Which response was selected.
+                 */
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     onClickListener.onClick(dialog,which, null);
                 }
             });
-        alertDialog=alertDialogBuilder.create();
+        alertDialog = alertDialogBuilder.create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
         alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         AlertDialogStyle(context, alertDialog);
     }
 
-    public static void AlertDialogSingleChoice(final Context context, String title, String[] strings, int curSelected, String positive, String negative,final DialogInterface.OnClickListener onClickListener){
-        selected=curSelected;
+    /**
+     * Constructs an <code>AlertDialog</code>.
+     * @param context Android context
+     * @param title Title of the dialog
+     * @param strings Array of button strings
+     * @param curSelected Currently selected string
+     * @param positive Positive response
+     * @param negative Negative response
+     * @param onClickListener Listener for button clicks.
+     */
+    public static void AlertDialogSingleChoice(final Context context, String title, String[] strings,
+                                               int curSelected, String positive, String negative,
+                                               final DialogInterface.OnClickListener onClickListener){
+        selected = curSelected;
         alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
                 .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                    /**
+                     * Passes the cancel button click to the listener.
+                     * @param dialog Dialog clicked
+                     */
                     @Override
                     public void onCancel(DialogInterface dialog) {
                         onClickListener.onClick(dialog, -1);
                     }
                 })
                 .setNegativeButton(negative, new DialogInterface.OnClickListener() {
+                    /**
+                     * Passes the negative button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         onClickListener.onClick(dialog,-1);
                     }
                 })
                 .setPositiveButton(positive, new DialogInterface.OnClickListener() {
+                    /**
+                     * Passes the positive button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 })
                 .setSingleChoiceItems(strings, curSelected, new DialogInterface.OnClickListener() {
+                    /**
+                     * Passes the button click to the listener.
+                     * @param dialog Dialog clicked
+                     * @param which Which response was selected.
+                     */
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        selected=which;
+                        selected = which;
                     }
                 })
                 .create();
@@ -271,10 +338,14 @@ public class AlertDialogs {
         alertDialog.show();
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener()
         {
+            /**
+             * Dismisses the dialog.
+             * @param v Button that is clicked.
+             */
             @Override
             public void onClick(View v)
             {
-                if(selected!=-1) {
+                if(selected!= -1) {
                     onClickListener.onClick(null, selected);
                     alertDialog.dismiss();
                 }

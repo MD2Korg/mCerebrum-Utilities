@@ -1,7 +1,6 @@
-package org.md2k.utilities.storage;
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +25,20 @@ package org.md2k.utilities.storage;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.storage;
+
+/**
+ * Enumeration of storage types
+ * <p>
+ *     <ul>
+ *         <li><code>"ASSET"</code></li>
+ *         <li><code>"SDCARD_APPLICATION"</code></li>
+ *         <li><code>"SDCARD_INTERNAL"</code></li>
+ *         <li><code>"SDCARD_EXTERNAL"</code></li>
+ *         <li><code>"SDCARD_EXTERNAL_PREFERRED"</code></li>
+ *     </ul>
+ * </p>
+ */
 public enum StorageType {
     ASSET("ASSET"),
     SDCARD_APPLICATION("SDCARD_APPLICATION"),
@@ -35,10 +48,18 @@ public enum StorageType {
 
     private String stringValue;
 
+    /**
+     * Constructor
+     * @param toString Storage type as a string.
+     */
     StorageType(String toString) {
         stringValue = toString;
     }
 
+    /**
+     * Returns the storage type as a string.
+     * @return The storage type as a string.
+     */
     @Override
     public String toString() {
         return stringValue;

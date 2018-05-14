@@ -1,8 +1,6 @@
-package org.md2k.utilities.Report;
-
 /*
- * Copyright (c) 2016, The University of Memphis, MD2K Center
- * - Timothy Hnat <twhnat@memphis.edu>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,16 +25,25 @@ package org.md2k.utilities.Report;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.md2k.utilities.Report;
+
 import android.os.Environment;
 
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Manages the process of creating and storing <code>logfiles</code>
+ */
 public class LogStorage {
     private static final String logDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/logs/";
     private static String logfile;
     private static Process process;
 
+    /**
+     * Creates a <code>logfile</code> and <code>logcat</code> process for the given application.
+     * @param applicationName Name of application
+     */
     public static void startLogFileStorageProcess(String applicationName) {
         logfile = logDir + applicationName + ".log";
 
@@ -45,12 +52,10 @@ public class LogStorage {
             if (!log.exists()) {
                 log.mkdirs();
             }
-
             try {
                 if (process != null) {
                     process.destroy();
                 }
-
                 ProcessBuilder pb = new ProcessBuilder("logcat", "-c");
                 process = pb.start();
 
@@ -65,5 +70,4 @@ public class LogStorage {
             }
         }
     }
-
 }

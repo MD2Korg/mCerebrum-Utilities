@@ -1,8 +1,6 @@
-package org.md2k.utilities.Report;
-
 /*
- * Copyright (c) 2015, The University of Memphis, MD2K Center
- * - Syed Monowar Hossain <monowar.hossain@gmail.com>
+ * Copyright (c) 2018, The University of Memphis, MD2K Center of Excellence
+ *
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,15 +24,39 @@ package org.md2k.utilities.Report;
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+package org.md2k.utilities.Report;
+
+/**
+ * Provides methods for writing log messages.
+ */
 public class Log {
-    public static final boolean DEBUG=true;
-    public static void d(String TAG,String logMessage){
-        if(DEBUG) android.util.Log.d("[MD2K]"+TAG,logMessage);
+    public static final boolean DEBUG = true;
+
+    /**
+     * Sends a <code>DEBUG</code> log message.
+     * @param TAG Log message tag
+     * @param logMessage Message to log
+     */
+    public static void d(String TAG, String logMessage){
+        if(DEBUG) android.util.Log.d("[MD2K]" + TAG, logMessage);
     }
-    public static void w(String TAG,String logMessage){
-        android.util.Log.w("[MD2K]"+TAG,logMessage);
+
+    /**
+     * Sends a <code>WARN</code> log message.
+     * @param TAG Log message tag
+     * @param logMessage Message to log
+     */
+    public static void w(String TAG, String logMessage){
+        android.util.Log.w("[MD2K]" + TAG, logMessage);
     }
-    public static void e(String TAG,String logMessage){
+
+    /**
+     * Sends an <code>ERROR</code> log message.
+     * @param TAG Log message tag
+     * @param logMessage Message to log
+     */
+    public static void e(String TAG, String logMessage){
         android.util.Log.e("[MD2K]" + TAG, logMessage);
     }
 }
