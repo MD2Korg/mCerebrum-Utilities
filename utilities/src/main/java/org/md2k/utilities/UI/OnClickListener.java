@@ -6,5 +6,5 @@ import android.content.DialogInterface;
  * Created by monowar on 6/16/16.
  */
 public interface OnClickListener {
-    public void onClick(DialogInterface dialog, int which, String result);
+    void onClick(DialogInterface dialog, int which, String result);
 }

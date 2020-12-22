@@ -80,7 +80,7 @@ public class Apps {
         try {
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi.versionCode;
-        } catch (PackageManager.NameNotFoundException ex) {}
+        } catch (PackageManager.NameNotFoundException ignored) {}
         return 0;
     }
     public static String getVersionName(Context context,String packageName){
@@ -88,7 +88,7 @@ public class Apps {
         try {
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
             return pi.versionName;
-        } catch (PackageManager.NameNotFoundException ex) {}
+        } catch (PackageManager.NameNotFoundException ignored) {}
         return null;
     }
 

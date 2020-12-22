@@ -74,9 +74,12 @@ public class FileManager {
     }
 
     private static String getExternalSDCardDirectory(Context context) {
-        File[] externalFilesDirs = context.getExternalFilesDirs(null);
-        if (externalFilesDirs != null && externalFilesDirs.length >= 2) {
-            return externalFilesDirs[1].getAbsolutePath() + File.separator;
+        try {
+            File[] externalFilesDirs = context.getExternalFilesDirs(null);
+            if (externalFilesDirs != null && externalFilesDirs.length >= 2) {
+                return externalFilesDirs[1].getAbsolutePath() + File.separator;
+            }
+        }catch (Exception ignored){
         }
         return null;
     }
@@ -425,7 +428,7 @@ public class FileManager {
         }
     }
 
-    static class ListOfSomething<X> implements ParameterizedType {
+    public static class ListOfSomething<X> implements ParameterizedType {
 
         private Class<?> wrapped;
 

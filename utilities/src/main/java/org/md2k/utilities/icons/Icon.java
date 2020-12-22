@@ -59,7 +59,7 @@ public class Icon {
     public enum Size {
         EXTRA_SMALL(12), SMALL(24), MEDIUM(48), LARGE(72), EXTRA_LARGE(96);
         private int value;
-        private Size(int value){
+        Size(int value){
             this.value = value;
         }
     }
@@ -87,7 +87,7 @@ public class Icon {
         EATING(GoogleMaterial.Icon.gmd_local_dining),
         SMOKING(GoogleMaterial.Icon.gmd_smoking_rooms);
         private IIcon value;
-        private Id(IIcon value){
+        Id(IIcon value){
             this.value = value;
         }
     }

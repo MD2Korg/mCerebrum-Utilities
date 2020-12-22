@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
-import android.support.v7.widget.AppCompatTextView;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -15,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import org.md2k.utilities.R;
 
@@ -243,12 +243,6 @@ public class AlertDialogs {
         selected=curSelected;
         alertDialog = new AlertDialog.Builder(new ContextThemeWrapper(context, R.style.app_theme_teal_light_dialog))
                 .setTitle(title)
-                .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                    @Override
-                    public void onCancel(DialogInterface dialog) {
-                        onClickListener.onClick(dialog, -1);
-                    }
-                })
                 .setNegativeButton(negative, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -266,6 +260,7 @@ public class AlertDialogs {
                         selected=which;
                     }
                 })
+                .setCancelable(false)
                 .create();
         alertDialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
         alertDialog.show();
@@ -274,10 +269,8 @@ public class AlertDialogs {
             @Override
             public void onClick(View v)
             {
-                if(selected!=-1) {
                     onClickListener.onClick(null, selected);
                     alertDialog.dismiss();
-                }
             }
         });
         AlertDialogStyle(context, alertDialog);

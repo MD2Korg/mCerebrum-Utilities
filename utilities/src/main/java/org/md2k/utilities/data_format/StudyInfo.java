@@ -67,7 +67,6 @@ public class StudyInfo {
         if (!id.equals(studyInfo.id)) return false;
         if (!name.equals(studyInfo.name)) return false;
         if (!version.equals(studyInfo.version)) return false;
-        if (!filename.equals(studyInfo.filename)) return false;
-        return true;
+        return filename.equals(studyInfo.filename);
     }
 }

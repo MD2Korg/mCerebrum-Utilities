@@ -70,9 +70,7 @@ public class DayTypeInfo {
     }
 
     public boolean equals(DayTypeInfo dayTypeInfo){
-        if(day_type!=dayTypeInfo.day_type)
-            return false;
-        return true;
+        return day_type == dayTypeInfo.day_type;
     }
 
     public String log(){

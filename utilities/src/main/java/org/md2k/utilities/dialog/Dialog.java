@@ -26,14 +26,19 @@ package org.md2k.utilities.dialog;
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.text.InputType;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -41,8 +46,8 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import org.md2k.utilities.R;
 import org.md2k.utilities.icons.Icon;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -50,8 +55,18 @@ public class Dialog {
     public static final int BUTTON_POSITIVE = 0;
     public static final int BUTTON_NEGATIVE = 1;
     public static final int BUTTON_NEUTRAL = 2;
+    public static enum TYPE{QUESTION};
     private DatePicker datePicker;
+    private Intent intent;
+    private Context context;
+    DialogCallback dialogCallback;
+    public Dialog(){
 
+    }
+    public Dialog(Context context, Intent intent){
+        this.context=context;
+        this.intent=intent;
+    }
     public MaterialDialog.Builder SingleChoice(Context context, String title, String content, String[] items, String selectedItem,String[] buttonText, Drawable icon, final DialogCallback dialogCallback){
         MaterialDialog.Builder materialDialogBuilder=setDefault(context,title, content,buttonText, icon, dialogCallback);
         int selected=0;
@@ -161,7 +176,7 @@ public class Dialog {
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         int hour = timePicker.getCurrentHour();
                         int minute = timePicker.getCurrentMinute();
-                        String timeString = String.format(Locale.US, "%02d:%02d:00", hour, minute);
+                        String timeString = String.valueOf((hour*60+minute)*60*1000);
                         System.out.println("Time = "+ timeString);
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE, new String[]{timeString});
 
@@ -189,9 +204,13 @@ public class Dialog {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                         int year = datePicker.getYear();
-                        int month = datePicker.getMonth()+1;
+                        int month = datePicker.getMonth();
                         int dayOfMonth = datePicker.getDayOfMonth();
-                        String givenDateString = String.format(Locale.US, "%02d-%02d-%d", month, dayOfMonth, year);
+                        Calendar c= Calendar.getInstance();
+                        c.set(Calendar.YEAR, year);c.set(Calendar.MONTH, month);c.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        c.set(Calendar.HOUR_OF_DAY, 0);c.set(Calendar.MINUTE, 0);c.set(Calendar.SECOND, 0);c.set(Calendar.MILLISECOND, 0);
+
+                        String givenDateString = String.valueOf(c.getTimeInMillis());
                         System.out.println("Date = "+ givenDateString);
                         dialogCallback.onDialogCallback(DialogResponse.POSITIVE, new String[]{givenDateString});
 
@@ -259,5 +278,23 @@ public class Dialog {
             return stringValue;
         }
     }
+    public void start(DialogCallback dialogCallback){
+        this.dialogCallback=dialogCallback;
+        LocalBroadcastManager.getInstance(context).registerReceiver(abcd, new IntentFilter("dialog_result"));
+        context.startActivity(intent);
 
+    }
+    private final BroadcastReceiver abcd = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            LocalBroadcastManager.getInstance(context).unregisterReceiver(abcd);
+            dialogCallback.onDialogCallback((DialogResponse) intent.getSerializableExtra("which"), intent.getStringArrayExtra("result"));
+        }
+    };
+    public void stop(){
+        Intent intent=new Intent("dialog_option");
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(abcd);
+    }
 }

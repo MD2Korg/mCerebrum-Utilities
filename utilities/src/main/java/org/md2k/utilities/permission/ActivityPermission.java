@@ -8,8 +8,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 
 /**
  * Copyright (c) 2015, The University of Memphis, MD2K Center
@@ -79,8 +80,13 @@ public class ActivityPermission extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_MANAGE_OVERLAY_PERMISSION) {
-            if (Settings.canDrawOverlays(this))
+            if (Settings.canDrawOverlays(this)) {
+                String[] p = PermissionInfo.getList(getApplicationContext());
+                if(p==null || p.length==0)
+                    close(true);
+                else
                 requestPermissions(PermissionInfo.getList(getApplicationContext()), RESULT_PERMISSION);
+            }
             else
                 close(false);
         }

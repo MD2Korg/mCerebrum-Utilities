@@ -52,4 +52,4 @@ public class PrivacyType {
     public String getSummary() {
         return summary;
     }
-};
+}
